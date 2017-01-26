@@ -1,0 +1,16 @@
+# Ignore db files
+db
+incremental_db
+
+# Ignore greybox files
+greybox_tmp
+
+# Ignore output files (GENERATE YOUR OWN!)
+output_files
+simulation
+
+# Ignore .DS_Store
+.DS_Store
+
+# Ignore AMP files
+AlteraMonitorProject
