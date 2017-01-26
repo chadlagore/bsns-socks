@@ -9,6 +9,7 @@
 
 # Qsys files
 !*.qsys
+!*.mif
 
 # Block design files
 !*.bdf
