@@ -1,16 +1,23 @@
-# Ignore db files
-db
-incremental_db
+# Ignore everything
+*
 
-# Ignore greybox files
-greybox_tmp
+# Except the following
 
-# Ignore output files (GENERATE YOUR OWN!)
-output_files
-simulation
+# Design files
+!*.vhd
+!*.v
 
-# Ignore .DS_Store
-.DS_Store
+# Qsys files
+!*.qsys
 
-# Ignore AMP files
-AlteraMonitorProject
+# Block design files
+!*.bdf
+
+# System design constraints
+!*.sdc
+
+# Pinout
+!*.qsf
+
+# Project file
+!*.qpf
