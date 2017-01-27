@@ -151,7 +151,7 @@ agreement for further details.
 )
 (pin
 	(input)
-	(rect 1360 984 1536 1000)
+	(rect 1856 1000 2032 1016)
 	(text "INPUT" (rect 15 0 43 10)(font "Arial" (font_size 6)))
 	(text "BlueTooth_RxData" (rect 75 0 167 12)(font "Arial" ))
 	(pt 0 8)
@@ -168,7 +168,7 @@ agreement for further details.
 )
 (pin
 	(input)
-	(rect 1816 1000 1992 1016)
+	(rect 2376 1000 2552 1016)
 	(text "INPUT" (rect 15 0 43 10)(font "Arial" (font_size 6)))
 	(text "TouchScreen_RxData" (rect 60 0 167 12)(font "Arial" ))
 	(pt 0 8)
@@ -185,7 +185,7 @@ agreement for further details.
 )
 (pin
 	(input)
-	(rect 2376 1000 2552 1016)
+	(rect 1360 984 1536 1000)
 	(text "INPUT" (rect 15 0 43 10)(font "Arial" (font_size 6)))
 	(text "GPS_RxData" (rect 101 0 167 12)(font "Arial" ))
 	(pt 0 8)
@@ -251,7 +251,7 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 1376 952 1552 968)
+	(rect 1864 968 2040 984)
 	(text "OUTPUT" (rect 137 0 175 10)(font "Arial" (font_size 6)))
 	(text "BlueTooth_TxData" (rect -3 0 86 12)(font "Arial" ))
 	(pt 176 8)
@@ -268,7 +268,7 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 1856 968 2032 984)
+	(rect 2384 960 2560 976)
 	(text "OUTPUT" (rect 137 0 175 10)(font "Arial" (font_size 6)))
 	(text "TouchScreen_TxData" (rect -19 0 86 12)(font "Arial" ))
 	(pt 176 8)
@@ -285,7 +285,7 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 2384 960 2560 976)
+	(rect 1368 944 1544 960)
 	(text "OUTPUT" (rect 137 0 175 10)(font "Arial" (font_size 6)))
 	(text "GPS_TxData" (rect 23 0 86 12)(font "Arial" ))
 	(pt 176 8)
@@ -460,28 +460,28 @@ agreement for further details.
 		(pt 200 32)
 		(output)
 		(text "IRQ_L" (rect 0 0 31 12)(font "Arial" ))
-		(text "IRQ_L" (rect 153 27 179 39)(font "Arial" ))
+		(text "IRQ_L" (rect 153 27 184 39)(font "Arial" ))
 		(line (pt 200 32)(pt 184 32))
 	)
 	(port
 		(pt 200 48)
 		(output)
 		(text "DataOut[7..0]" (rect 0 0 67 12)(font "Arial" ))
-		(text "DataOut[7..0]" (rect 123 43 179 55)(font "Arial" ))
+		(text "DataOut[7..0]" (rect 123 43 190 55)(font "Arial" ))
 		(line (pt 200 48)(pt 184 48)(line_width 3))
 	)
 	(port
 		(pt 200 64)
 		(output)
 		(text "TxData" (rect 0 0 35 12)(font "Arial" ))
-		(text "TxData" (rect 150 59 179 71)(font "Arial" ))
+		(text "TxData" (rect 150 59 185 71)(font "Arial" ))
 		(line (pt 200 64)(pt 184 64))
 	)
 	(port
 		(pt 200 80)
 		(output)
 		(text "RTS_L" (rect 0 0 33 12)(font "Arial" ))
-		(text "RTS_L" (rect 152 75 179 87)(font "Arial" ))
+		(text "RTS_L" (rect 152 75 185 87)(font "Arial" ))
 		(line (pt 200 80)(pt 184 80))
 	)
 	(drawing
@@ -640,28 +640,28 @@ agreement for further details.
 		(pt 200 32)
 		(output)
 		(text "IRQ_L" (rect 0 0 31 12)(font "Arial" ))
-		(text "IRQ_L" (rect 153 27 179 39)(font "Arial" ))
+		(text "IRQ_L" (rect 153 27 184 39)(font "Arial" ))
 		(line (pt 200 32)(pt 184 32))
 	)
 	(port
 		(pt 200 48)
 		(output)
 		(text "DataOut[7..0]" (rect 0 0 67 12)(font "Arial" ))
-		(text "DataOut[7..0]" (rect 123 43 179 55)(font "Arial" ))
+		(text "DataOut[7..0]" (rect 123 43 190 55)(font "Arial" ))
 		(line (pt 200 48)(pt 184 48)(line_width 3))
 	)
 	(port
 		(pt 200 64)
 		(output)
 		(text "TxData" (rect 0 0 35 12)(font "Arial" ))
-		(text "TxData" (rect 150 59 179 71)(font "Arial" ))
+		(text "TxData" (rect 150 59 185 71)(font "Arial" ))
 		(line (pt 200 64)(pt 184 64))
 	)
 	(port
 		(pt 200 80)
 		(output)
 		(text "RTS_L" (rect 0 0 33 12)(font "Arial" ))
-		(text "RTS_L" (rect 152 75 179 87)(font "Arial" ))
+		(text "RTS_L" (rect 152 75 185 87)(font "Arial" ))
 		(line (pt 200 80)(pt 184 80))
 	)
 	(drawing
@@ -820,28 +820,28 @@ agreement for further details.
 		(pt 200 32)
 		(output)
 		(text "IRQ_L" (rect 0 0 31 12)(font "Arial" ))
-		(text "IRQ_L" (rect 153 27 179 39)(font "Arial" ))
+		(text "IRQ_L" (rect 153 27 184 39)(font "Arial" ))
 		(line (pt 200 32)(pt 184 32))
 	)
 	(port
 		(pt 200 48)
 		(output)
 		(text "DataOut[7..0]" (rect 0 0 67 12)(font "Arial" ))
-		(text "DataOut[7..0]" (rect 123 43 179 55)(font "Arial" ))
+		(text "DataOut[7..0]" (rect 123 43 190 55)(font "Arial" ))
 		(line (pt 200 48)(pt 184 48)(line_width 3))
 	)
 	(port
 		(pt 200 64)
 		(output)
 		(text "TxData" (rect 0 0 35 12)(font "Arial" ))
-		(text "TxData" (rect 150 59 179 71)(font "Arial" ))
+		(text "TxData" (rect 150 59 185 71)(font "Arial" ))
 		(line (pt 200 64)(pt 184 64))
 	)
 	(port
 		(pt 200 80)
 		(output)
 		(text "RTS_L" (rect 0 0 33 12)(font "Arial" ))
-		(text "RTS_L" (rect 152 75 179 87)(font "Arial" ))
+		(text "RTS_L" (rect 152 75 185 87)(font "Arial" ))
 		(line (pt 200 80)(pt 184 80))
 	)
 	(drawing
@@ -1000,28 +1000,28 @@ agreement for further details.
 		(pt 200 32)
 		(output)
 		(text "IRQ_L" (rect 0 0 31 12)(font "Arial" ))
-		(text "IRQ_L" (rect 153 27 179 39)(font "Arial" ))
+		(text "IRQ_L" (rect 153 27 184 39)(font "Arial" ))
 		(line (pt 200 32)(pt 184 32))
 	)
 	(port
 		(pt 200 48)
 		(output)
 		(text "DataOut[7..0]" (rect 0 0 67 12)(font "Arial" ))
-		(text "DataOut[7..0]" (rect 123 43 179 55)(font "Arial" ))
+		(text "DataOut[7..0]" (rect 123 43 190 55)(font "Arial" ))
 		(line (pt 200 48)(pt 184 48)(line_width 3))
 	)
 	(port
 		(pt 200 64)
 		(output)
 		(text "TxData" (rect 0 0 35 12)(font "Arial" ))
-		(text "TxData" (rect 150 59 179 71)(font "Arial" ))
+		(text "TxData" (rect 150 59 185 71)(font "Arial" ))
 		(line (pt 200 64)(pt 184 64))
 	)
 	(port
 		(pt 200 80)
 		(output)
 		(text "RTS_L" (rect 0 0 33 12)(font "Arial" ))
-		(text "RTS_L" (rect 152 75 179 87)(font "Arial" ))
+		(text "RTS_L" (rect 152 75 185 87)(font "Arial" ))
 		(line (pt 200 80)(pt 184 80))
 	)
 	(drawing
@@ -1081,7 +1081,7 @@ agreement for further details.
 		(pt 64 40)
 		(output)
 		(text "OUT" (rect 48 31 65 43)(font "Courier New" (bold))(invisible))
-		(text "OUT" (rect 48 37 62 49)(font "Courier New" (bold))(invisible))
+		(text "OUT" (rect 48 37 65 49)(font "Courier New" (bold))(invisible))
 		(line (pt 54 40)(pt 64 40))
 	)
 	(drawing
@@ -1108,7 +1108,7 @@ agreement for further details.
 		(pt 16 48)
 		(output)
 		(text "OUT" (rect 32 7 49 19)(font "Courier New" (bold))(invisible))
-		(text "OUT" (rect 13 32 25 46)(font "Courier New" (bold))(vertical)(invisible))
+		(text "OUT" (rect 13 32 25 49)(font "Courier New" (bold))(vertical)(invisible))
 		(line (pt 16 39)(pt 16 48))
 	)
 	(drawing
@@ -1134,7 +1134,7 @@ agreement for further details.
 		(pt 16 48)
 		(output)
 		(text "OUT" (rect 32 7 49 19)(font "Courier New" (bold))(invisible))
-		(text "OUT" (rect 13 32 25 46)(font "Courier New" (bold))(vertical)(invisible))
+		(text "OUT" (rect 13 32 25 49)(font "Courier New" (bold))(vertical)(invisible))
 		(line (pt 16 39)(pt 16 48))
 	)
 	(drawing
@@ -1160,7 +1160,7 @@ agreement for further details.
 		(pt 16 48)
 		(output)
 		(text "OUT" (rect 32 7 49 19)(font "Courier New" (bold))(invisible))
-		(text "OUT" (rect 13 32 25 46)(font "Courier New" (bold))(vertical)(invisible))
+		(text "OUT" (rect 13 32 25 49)(font "Courier New" (bold))(vertical)(invisible))
 		(line (pt 16 39)(pt 16 48))
 	)
 	(drawing
@@ -1794,18 +1794,6 @@ agreement for further details.
 	(pt 1296 992)
 )
 (connector
-	(pt 1296 992)
-	(pt 1360 992)
-)
-(connector
-	(pt 1592 736)
-	(pt 1592 960)
-)
-(connector
-	(pt 1592 960)
-	(pt 1552 960)
-)
-(connector
 	(pt 2064 728)
 	(pt 2064 1040)
 	(bus)
@@ -1875,16 +1863,8 @@ agreement for further details.
 	(pt 1784 1008)
 )
 (connector
-	(pt 1784 1008)
-	(pt 1816 1008)
-)
-(connector
 	(pt 2080 744)
 	(pt 2080 976)
-)
-(connector
-	(pt 2080 976)
-	(pt 2032 976)
 )
 (connector
 	(text "DataIn[2..0]" (rect 2234 152 2293 164)(font "Arial" ))
@@ -2162,22 +2142,6 @@ agreement for further details.
 	(pt 904 992)
 )
 (connector
-	(pt 2600 736)
-	(pt 2600 968)
-)
-(connector
-	(pt 2600 968)
-	(pt 2560 968)
-)
-(connector
-	(pt 2312 1008)
-	(pt 2376 1008)
-)
-(connector
-	(pt 2312 832)
-	(pt 2312 1008)
-)
-(connector
 	(pt 1096 728)
 	(pt 1096 1040)
 	(bus)
@@ -2271,6 +2235,42 @@ agreement for further details.
 (connector
 	(pt 2144 720)
 	(pt 2368 720)
+)
+(connector
+	(pt 1592 736)
+	(pt 1592 952)
+)
+(connector
+	(pt 1856 1008)
+	(pt 1784 1008)
+)
+(connector
+	(pt 2040 976)
+	(pt 2080 976)
+)
+(connector
+	(pt 2600 736)
+	(pt 2600 968)
+)
+(connector
+	(pt 1544 952)
+	(pt 1592 952)
+)
+(connector
+	(pt 2312 832)
+	(pt 2312 1008)
+)
+(connector
+	(pt 1296 992)
+	(pt 1360 992)
+)
+(connector
+	(pt 2312 1008)
+	(pt 2376 1008)
+)
+(connector
+	(pt 2600 968)
+	(pt 2560 968)
 )
 (junction (pt 856 872))
 (junction (pt 832 808))
