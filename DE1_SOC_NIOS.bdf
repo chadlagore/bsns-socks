@@ -1209,9 +1209,9 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 968 768 1272 992)
-	(text "OnChipM68xxIO" (rect 5 0 69 10)(font "Arial" (font_size 6)))
-	(text "inst" (rect 8 208 25 220)(font "Arial" ))
+	(rect 968 768 1272 1024)
+	(text "OnChipM68xxIO" (rect 5 0 95 14)(font "Arial" (font_size 8)))
+	(text "inst" (rect 8 240 25 252)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -1290,6 +1290,13 @@ agreement for further details.
 		(line (pt 0 192)(pt 16 192))
 	)
 	(port
+		(pt 0 208)
+		(input)
+		(text "Wifi_RxData" (rect 0 0 69 14)(font "Arial" (font_size 8)))
+		(text "Wifi_RxData" (rect 21 203 90 217)(font "Arial" (font_size 8)))
+		(line (pt 0 208)(pt 16 208))
+	)
+	(port
 		(pt 304 32)
 		(output)
 		(text "RS232_TxData" (rect 0 0 84 14)(font "Arial" (font_size 8)))
@@ -1313,26 +1320,33 @@ agreement for further details.
 	(port
 		(pt 304 80)
 		(output)
-		(text "TouchScreen_TxData" (rect 0 0 123 14)(font "Arial" (font_size 8)))
-		(text "TouchScreen_TxData" (rect 160 75 283 89)(font "Arial" (font_size 8)))
+		(text "Wifi_TxData" (rect 0 0 68 14)(font "Arial" (font_size 8)))
+		(text "Wifi_TxData" (rect 215 75 283 89)(font "Arial" (font_size 8)))
 		(line (pt 304 80)(pt 288 80))
 	)
 	(port
 		(pt 304 96)
 		(output)
-		(text "ACIA_IRQ" (rect 0 0 56 14)(font "Arial" (font_size 8)))
-		(text "ACIA_IRQ" (rect 227 91 283 105)(font "Arial" (font_size 8)))
+		(text "TouchScreen_TxData" (rect 0 0 123 14)(font "Arial" (font_size 8)))
+		(text "TouchScreen_TxData" (rect 160 91 283 105)(font "Arial" (font_size 8)))
 		(line (pt 304 96)(pt 288 96))
 	)
 	(port
 		(pt 304 112)
 		(output)
+		(text "ACIA_IRQ" (rect 0 0 56 14)(font "Arial" (font_size 8)))
+		(text "ACIA_IRQ" (rect 227 107 283 121)(font "Arial" (font_size 8)))
+		(line (pt 304 112)(pt 288 112))
+	)
+	(port
+		(pt 304 128)
+		(output)
 		(text "DataOut[7..0]" (rect 0 0 74 14)(font "Arial" (font_size 8)))
-		(text "DataOut[7..0]" (rect 209 107 283 121)(font "Arial" (font_size 8)))
-		(line (pt 304 112)(pt 288 112)(line_width 3))
+		(text "DataOut[7..0]" (rect 209 123 283 137)(font "Arial" (font_size 8)))
+		(line (pt 304 128)(pt 288 128)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 288 208))
+		(rectangle (rect 16 16 288 240))
 	)
 )
 (connector
@@ -1810,11 +1824,6 @@ agreement for further details.
 	(pt 968 944)
 )
 (connector
-	(text "GPIO_1[26]" (rect 1322 832 1379 844)(font "Arial" ))
-	(pt 1272 848)
-	(pt 1416 848)
-)
-(connector
 	(text "GPIO_1[34]" (rect 1322 800 1379 812)(font "Arial" ))
 	(pt 1272 816)
 	(pt 1416 816)
@@ -1864,14 +1873,6 @@ agreement for further details.
 	(pt 272 800)
 )
 (connector
-	(pt 1544 864)
-	(pt 1272 864)
-)
-(connector
-	(pt 1544 736)
-	(pt 1544 864)
-)
-(connector
 	(pt 776 816)
 	(pt 968 816)
 	(bus)
@@ -1883,22 +1884,17 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 1528 880)
-	(pt 1272 880)
-	(bus)
-)
-(connector
-	(pt 1528 752)
-	(pt 1528 880)
-	(bus)
-)
-(connector
 	(pt 728 864)
 	(pt 968 864)
 )
 (connector
 	(pt 728 664)
 	(pt 728 864)
+)
+(connector
+	(text "GPIO_0[2]" (rect 1322 784 1373 796)(font "Arial" ))
+	(pt 1272 800)
+	(pt 1416 800)
 )
 (connector
 	(pt 640 328)
@@ -1953,6 +1949,39 @@ agreement for further details.
 (connector
 	(pt 224 104)
 	(pt 224 880)
+)
+(connector
+	(pt 1528 752)
+	(pt 1528 896)
+	(bus)
+)
+(connector
+	(pt 1272 896)
+	(pt 1528 896)
+	(bus)
+)
+(connector
+	(pt 1544 880)
+	(pt 1272 880)
+)
+(connector
+	(pt 1544 736)
+	(pt 1544 880)
+)
+(connector
+	(text "GPIO_1[26]" (rect 1322 848 1379 860)(font "Arial" ))
+	(pt 1272 864)
+	(pt 1416 864)
+)
+(connector
+	(text "GPIO_1[35]" (rect 1322 832 1379 844)(font "Arial" ))
+	(pt 1272 848)
+	(pt 1416 848)
+)
+(connector
+	(text "GPIO_1[33]" (rect 794 960 851 972)(font "Arial" ))
+	(pt 968 976)
+	(pt 784 976)
 )
 (junction (pt 664 296))
 (junction (pt 208 88))
