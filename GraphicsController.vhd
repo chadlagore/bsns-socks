@@ -243,6 +243,7 @@ Begin
 			if(CurrentState = DrawHline and NextState = DrawHline) then
 				-- horizontal increment.
 				X1 <= X1 + 1;
+			-- elsif(CurrentState = DrawLine and NextState = DrawLine) then -- bresenhams algo.
 			end if;
 			if(X1_Select_H = '1') then
 				if(UDS_L = '0') then
@@ -268,8 +269,8 @@ Begin
 			Y1 <= X"0000" ;
 		elsif(rising_edge(Clk)) then
 			if(CurrentState = DrawVline and NextState = DrawVline) then
-				-- horizontal increment.
-				X1 <= X1 + 1;
+				-- vertical increment.
+				Y1 <= Y1 + 1;
 			end if;
 			if(Y1_Select_H = '1') then
 				if(UDS_L = '0') then
@@ -654,14 +655,31 @@ Begin
 				 -- we are done.
 				 NextState <= IDLE;
 			else
-				 NextState <= DrawHline;
+				 NextState <= DrawVline;
 			end if;
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		elsif(CurrentState = DrawLine) then
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			-- TODO in your project
-			NextState <= IDLE;
+			Sig_AddressOut 	<= Y1(8 downto 0) & X1(9 downto 1);				-- 9 bit x address even though it goes up to 1024 which would mean 10 bits, because each address = 2 pixels/bytes
+			Sig_RW_Out			<= '0';													-- we are intending to draw a pixel so set RW to '0' for a write to memory
+
+			if(X1(0) = '0')	then														-- if the address/pixel is an even numbered one
+				Sig_UDS_Out_L 	<= '0';													-- enable write to upper half of Sram data bus to access 1 pixel at that location
+			else
+				Sig_LDS_Out_L 	<= '0';													-- else write to lower half of Sram data bus to get the other pixel at that address
+			end if;
+
+			-- the data that we write comes from the default value assigned to Sig_DataOut previously
+			-- you will recall that this is the value of the Colour register
+
+			if (Y1 >= Y2 and X2 >= X1) then
+				 -- we are done.
+				 NextState <= IDLE;
+			else
+				 NextState <= DrawLine;
+			end if;
 
 		end if ;
 	end process;
