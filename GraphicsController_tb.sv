@@ -1,4 +1,5 @@
 
+/// TESTBENCH ///
 module GraphicsController_tb();
 
 	logic clk, Reset_L;
