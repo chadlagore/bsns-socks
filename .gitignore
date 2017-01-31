@@ -22,3 +22,7 @@
 
 # Project file
 !*.qpf
+
+# Qip files
+!*.qip
+!*.sip
