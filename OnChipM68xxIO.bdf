@@ -204,7 +204,7 @@ agreement for further details.
 	(input)
 	(rect 2816 1000 2984 1016)
 	(text "INPUT" (rect 15 0 43 10)(font "Arial" (font_size 6)))
-	(text "Wifi_RxData" (rect 99 0 163 12)(font "Arial" ))
+	(text "Wifi_RxData" (rect 99 0 162 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 84 12)(pt 59 12))
@@ -321,7 +321,7 @@ agreement for further details.
 	(output)
 	(rect 2832 960 3008 976)
 	(text "OUTPUT" (rect 137 0 175 10)(font "Arial" (font_size 6)))
-	(text "Wifi_TxData" (rect 5 0 67 12)(font "Arial" ))
+	(text "Wifi_TxData" (rect 5 0 66 12)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 176 8)(pt 124 8))
@@ -333,6 +333,22 @@ agreement for further details.
 		(line (pt 98 12)(pt 94 8))
 	)
 	(flipy)
+)
+(pin
+	(output)
+	(rect 2064 1320 2240 1336)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "LEDR[0]" (rect 90 0 132 12)(font "Arial" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
 )
 (symbol
 	(rect 616 712 664 744)
@@ -1257,7 +1273,7 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 2848 672 3048 912)
+	(rect 2880 672 3080 912)
 	(text "ACIA_6850" (rect 5 0 60 12)(font "Arial" ))
 	(text "inst" (rect 8 224 25 236)(font "Arial" ))
 	(port
@@ -1859,10 +1875,6 @@ agreement for further details.
 	(pt 2576 152)
 )
 (connector
-	(pt 2368 752)
-	(pt 2192 752)
-)
-(connector
 	(pt 2368 816)
 	(pt 2288 816)
 )
@@ -2016,10 +2028,6 @@ agreement for further details.
 (connector
 	(pt 1264 216)
 	(pt 1264 632)
-)
-(connector
-	(pt 2192 752)
-	(pt 2192 648)
 )
 (connector
 	(pt 1752 224)
@@ -2514,52 +2522,12 @@ agreement for further details.
 	(pt 2848 160)
 )
 (connector
-	(pt 2744 704)
-	(pt 2792 704)
-)
-(connector
-	(pt 2792 704)
-	(pt 2848 704)
-)
-(connector
-	(pt 2816 616)
-	(pt 2816 768)
-)
-(connector
-	(pt 2848 768)
-	(pt 2816 768)
-)
-(connector
-	(pt 1784 616)
-	(pt 2304 616)
-)
-(connector
-	(pt 2304 616)
-	(pt 2816 616)
-)
-(connector
 	(pt 2656 632)
 	(pt 2656 664)
 )
 (connector
 	(pt 2144 632)
 	(pt 2272 632)
-)
-(connector
-	(pt 2656 712)
-	(pt 2656 720)
-)
-(connector
-	(pt 2656 720)
-	(pt 2848 720)
-)
-(connector
-	(pt 2776 736)
-	(pt 2848 736)
-)
-(connector
-	(pt 2776 536)
-	(pt 2776 736)
 )
 (connector
 	(pt 528 536)
@@ -2589,22 +2557,6 @@ agreement for further details.
 (connector
 	(pt 2224 88)
 	(pt 2760 88)
-	(bus)
-)
-(connector
-	(pt 2760 88)
-	(pt 2760 176)
-	(bus)
-)
-(connector
-	(pt 2760 176)
-	(pt 2760 784)
-	(bus)
-)
-(connector
-	(text "DataIn[7..0]" (rect 2770 768 2829 780)(font "Arial" ))
-	(pt 2760 784)
-	(pt 2848 784)
 	(bus)
 )
 (connector
@@ -2638,116 +2590,12 @@ agreement for further details.
 	(pt 3048 288)
 )
 (connector
-	(pt 3048 288)
-	(pt 2832 288)
-)
-(connector
-	(pt 2832 800)
-	(pt 2848 800)
-)
-(connector
-	(pt 2832 816)
-	(pt 2848 816)
-)
-(connector
-	(pt 2832 288)
-	(pt 2832 800)
-)
-(connector
-	(pt 2832 800)
-	(pt 2832 816)
-)
-(connector
-	(pt 3048 720)
-	(pt 3064 720)
-	(bus)
-)
-(connector
-	(pt 3064 720)
-	(pt 3064 1040)
-	(bus)
-)
-(connector
-	(pt 2064 1040)
-	(pt 2584 1040)
-	(bus)
-)
-(connector
-	(pt 2584 1040)
-	(pt 3064 1040)
-	(bus)
-)
-(connector
-	(pt 3048 704)
-	(pt 3096 704)
-)
-(connector
-	(pt 3096 704)
-	(pt 3096 1192)
-)
-(connector
-	(pt 1624 1192)
-	(pt 3096 1192)
-)
-(connector
 	(pt 1624 1192)
 	(pt 1624 1264)
 )
 (connector
 	(pt 1624 1264)
 	(pt 1848 1264)
-)
-(connector
-	(pt 1952 1296)
-	(pt 2064 1296)
-)
-(connector
-	(pt 2848 832)
-	(pt 2712 832)
-)
-(connector
-	(pt 2712 832)
-	(pt 2712 1008)
-)
-(connector
-	(pt 2712 1008)
-	(pt 2816 1008)
-)
-(connector
-	(pt 2848 848)
-	(pt 2816 848)
-)
-(connector
-	(pt 2848 864)
-	(pt 2816 864)
-)
-(connector
-	(pt 2816 848)
-	(pt 2816 864)
-)
-(connector
-	(pt 2816 864)
-	(pt 2816 880)
-)
-(connector
-	(pt 2848 752)
-	(pt 2704 752)
-)
-(connector
-	(pt 2704 752)
-	(pt 2704 648)
-)
-(connector
-	(pt 1752 648)
-	(pt 2192 648)
-)
-(connector
-	(pt 2192 648)
-	(pt 2704 648)
-)
-(connector
-	(pt 3048 736)
-	(pt 3080 736)
 )
 (connector
 	(pt 528 552)
@@ -2762,12 +2610,192 @@ agreement for further details.
 	(pt 2728 192)
 )
 (connector
-	(pt 3080 736)
-	(pt 3080 968)
+	(pt 2368 752)
+	(pt 2272 752)
 )
 (connector
-	(pt 3080 968)
+	(pt 2272 648)
+	(pt 2272 752)
+)
+(connector
+	(pt 2656 712)
+	(pt 2656 720)
+)
+(connector
+	(pt 2776 536)
+	(pt 2776 736)
+)
+(connector
+	(pt 2744 704)
+	(pt 2792 704)
+)
+(connector
+	(pt 2760 88)
+	(pt 2760 176)
+	(bus)
+)
+(connector
+	(pt 2760 176)
+	(pt 2760 784)
+	(bus)
+)
+(connector
+	(pt 2792 704)
+	(pt 2880 704)
+)
+(connector
+	(pt 2656 720)
+	(pt 2880 720)
+)
+(connector
+	(pt 2776 736)
+	(pt 2880 736)
+)
+(connector
+	(text "DataIn[7..0]" (rect 2802 768 2861 780)(font "Arial" ))
+	(pt 2760 784)
+	(pt 2880 784)
+	(bus)
+)
+(connector
+	(pt 2816 864)
+	(pt 2880 864)
+)
+(connector
+	(pt 3080 720)
+	(pt 3104 720)
+	(bus)
+)
+(connector
+	(pt 3104 1040)
+	(pt 3104 720)
+	(bus)
+)
+(connector
+	(pt 2064 1040)
+	(pt 2584 1040)
+	(bus)
+)
+(connector
+	(pt 2584 1040)
+	(pt 3104 1040)
+	(bus)
+)
+(connector
 	(pt 3008 968)
+	(pt 3120 968)
+)
+(connector
+	(pt 3080 736)
+	(pt 3120 736)
+)
+(connector
+	(pt 3120 736)
+	(pt 3120 968)
+)
+(connector
+	(pt 1624 1192)
+	(pt 3136 1192)
+)
+(connector
+	(pt 3080 704)
+	(pt 3136 704)
+)
+(connector
+	(pt 3136 1192)
+	(pt 3136 704)
+)
+(connector
+	(pt 2880 848)
+	(pt 2816 848)
+)
+(connector
+	(pt 2816 848)
+	(pt 2816 864)
+)
+(connector
+	(pt 2816 864)
+	(pt 2816 880)
+)
+(connector
+	(pt 3048 288)
+	(pt 2824 288)
+)
+(connector
+	(pt 2880 816)
+	(pt 2824 816)
+)
+(connector
+	(pt 2824 800)
+	(pt 2880 800)
+)
+(connector
+	(pt 2824 288)
+	(pt 2824 800)
+)
+(connector
+	(pt 2824 800)
+	(pt 2824 816)
+)
+(connector
+	(pt 2840 616)
+	(pt 2840 768)
+)
+(connector
+	(pt 2880 768)
+	(pt 2840 768)
+)
+(connector
+	(pt 1784 616)
+	(pt 2304 616)
+)
+(connector
+	(pt 2304 616)
+	(pt 2840 616)
+)
+(connector
+	(pt 2808 648)
+	(pt 2808 752)
+)
+(connector
+	(pt 2880 752)
+	(pt 2808 752)
+)
+(connector
+	(pt 1752 648)
+	(pt 2272 648)
+)
+(connector
+	(pt 2272 648)
+	(pt 2808 648)
+)
+(connector
+	(pt 2816 1008)
+	(pt 2784 1008)
+)
+(connector
+	(pt 2784 1008)
+	(pt 2784 832)
+)
+(connector
+	(pt 2880 832)
+	(pt 2784 832)
+)
+(connector
+	(pt 2016 1296)
+	(pt 2016 1328)
+)
+(connector
+	(pt 2016 1328)
+	(pt 2064 1328)
+)
+(connector
+	(pt 1952 1296)
+	(pt 2016 1296)
+)
+(connector
+	(pt 2016 1296)
+	(pt 2064 1296)
 )
 (junction (pt 856 872))
 (junction (pt 832 808))
@@ -2830,7 +2858,8 @@ agreement for further details.
 (junction (pt 2224 88))
 (junction (pt 2760 176))
 (junction (pt 2656 632))
-(junction (pt 2832 800))
 (junction (pt 2584 1040))
 (junction (pt 2816 864))
-(junction (pt 2192 648))
+(junction (pt 2272 648))
+(junction (pt 2824 800))
+(junction (pt 2016 1296))
