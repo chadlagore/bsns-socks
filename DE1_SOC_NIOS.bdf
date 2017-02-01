@@ -1821,11 +1821,6 @@ agreement for further details.
 	(pt 968 928)
 )
 (connector
-	(text "GPIO_0[10]" (rect 1322 816 1379 828)(font "Arial" ))
-	(pt 1272 832)
-	(pt 1416 832)
-)
-(connector
 	(text "key[0]" (rect 234 864 265 876)(font "Arial" ))
 	(pt 224 880)
 	(pt 968 880)
@@ -1902,16 +1897,6 @@ agreement for further details.
 	(pt 784 976)
 )
 (connector
-	(text "GPIO_1[34]" (rect 1322 800 1379 812)(font "Arial" ))
-	(pt 1272 816)
-	(pt 1416 816)
-)
-(connector
-	(text "GPIO_0[12]" (rect 794 944 851 956)(font "Arial" ))
-	(pt 784 960)
-	(pt 968 960)
-)
-(connector
 	(text "GPIO_0[0]" (rect 794 928 845 940)(font "Arial" ))
 	(pt 784 944)
 	(pt 968 944)
@@ -1920,10 +1905,6 @@ agreement for further details.
 	(text "GPIO_0[2]" (rect 1322 848 1373 860)(font "Arial" ))
 	(pt 1272 864)
 	(pt 1416 864)
-)
-(connector
-	(pt 1272 800)
-	(pt 1416 800)
 )
 (connector
 	(pt 1528 752)
@@ -1939,6 +1920,16 @@ agreement for further details.
 	(text "LEDR[0]" (rect 1322 880 1364 892)(font "Arial" ))
 	(pt 1272 896)
 	(pt 1416 896)
+)
+(connector
+	(text "GPIO_1[26]" (rect 1322 816 1379 828)(font "Arial" ))
+	(pt 1272 832)
+	(pt 1416 832)
+)
+(connector
+	(text "GPIO_1[28]" (rect 794 944 851 956)(font "Arial" ))
+	(pt 784 960)
+	(pt 968 960)
 )
 (connector
 	(pt 640 328)
@@ -1993,6 +1984,15 @@ agreement for further details.
 (connector
 	(pt 224 104)
 	(pt 224 880)
+)
+(connector
+	(text "GPIO_1[34]" (rect 1322 800 1379 812)(font "Arial" ))
+	(pt 1272 816)
+	(pt 1416 816)
+)
+(connector
+	(pt 1272 800)
+	(pt 1416 800)
 )
 (junction (pt 664 296))
 (junction (pt 208 88))

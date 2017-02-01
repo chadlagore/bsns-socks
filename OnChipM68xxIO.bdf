@@ -1914,14 +1914,6 @@ agreement for further details.
 	(pt 2616 704)
 )
 (connector
-	(pt 2192 184)
-	(pt 2192 520)
-)
-(connector
-	(pt 2240 736)
-	(pt 2240 504)
-)
-(connector
 	(pt 2208 704)
 	(pt 2256 704)
 )
@@ -1980,46 +1972,6 @@ agreement for further details.
 (connector
 	(pt 776 744)
 	(pt 776 408)
-)
-(connector
-	(pt 528 504)
-	(pt 2240 504)
-)
-(connector
-	(pt 528 520)
-	(pt 2192 520)
-)
-(connector
-	(pt 1232 440)
-	(pt 528 440)
-)
-(connector
-	(pt 1232 736)
-	(pt 1232 440)
-)
-(connector
-	(pt 1184 184)
-	(pt 1184 456)
-)
-(connector
-	(pt 528 456)
-	(pt 1184 456)
-)
-(connector
-	(pt 1720 744)
-	(pt 1720 472)
-)
-(connector
-	(pt 528 472)
-	(pt 1720 472)
-)
-(connector
-	(pt 1672 192)
-	(pt 1672 488)
-)
-(connector
-	(pt 528 488)
-	(pt 1672 488)
 )
 (connector
 	(pt 728 224)
@@ -2320,25 +2272,12 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 120 440)
-	(pt 128 440)
-)
-(connector
 	(pt 128 440)
 	(pt 256 440)
 )
 (connector
-	(pt 120 424)
-	(pt 128 424)
-)
-(connector
 	(pt 128 424)
 	(pt 256 424)
-)
-(connector
-	(pt 120 408)
-	(pt 128 408)
-	(bus)
 )
 (connector
 	(pt 128 408)
@@ -2361,22 +2300,6 @@ agreement for further details.
 (connector
 	(pt 696 72)
 	(pt 1200 72)
-)
-(connector
-	(pt 120 648)
-	(pt 128 648)
-)
-(connector
-	(pt 128 648)
-	(pt 728 648)
-)
-(connector
-	(pt 728 648)
-	(pt 1264 648)
-)
-(connector
-	(pt 120 632)
-	(pt 128 632)
 )
 (connector
 	(pt 1112 744)
@@ -2444,10 +2367,6 @@ agreement for further details.
 (connector
 	(pt 568 632)
 	(pt 568 728)
-)
-(connector
-	(pt 128 632)
-	(pt 568 632)
 )
 (connector
 	(pt 568 632)
@@ -2797,6 +2716,74 @@ agreement for further details.
 	(pt 2016 1296)
 	(pt 2064 1296)
 )
+(connector
+	(pt 120 632)
+	(pt 128 632)
+)
+(connector
+	(pt 128 632)
+	(pt 568 632)
+)
+(connector
+	(pt 120 648)
+	(pt 128 648)
+)
+(connector
+	(pt 128 648)
+	(pt 728 648)
+)
+(connector
+	(pt 728 648)
+	(pt 1264 648)
+)
+(connector
+	(pt 1232 736)
+	(pt 1232 472)
+)
+(connector
+	(pt 528 472)
+	(pt 1232 472)
+)
+(connector
+	(pt 1184 184)
+	(pt 1184 488)
+)
+(connector
+	(pt 528 488)
+	(pt 1184 488)
+)
+(connector
+	(pt 2240 736)
+	(pt 2240 440)
+)
+(connector
+	(pt 1720 744)
+	(pt 1720 504)
+)
+(connector
+	(pt 528 440)
+	(pt 2240 440)
+)
+(connector
+	(pt 528 504)
+	(pt 1720 504)
+)
+(connector
+	(pt 2192 184)
+	(pt 2192 456)
+)
+(connector
+	(pt 1672 192)
+	(pt 1672 520)
+)
+(connector
+	(pt 528 456)
+	(pt 2192 456)
+)
+(connector
+	(pt 528 520)
+	(pt 1672 520)
+)
 (junction (pt 856 872))
 (junction (pt 832 808))
 (junction (pt 744 712))
@@ -2839,9 +2826,6 @@ agreement for further details.
 (junction (pt 1296 616))
 (junction (pt 1784 616))
 (junction (pt 128 88))
-(junction (pt 128 440))
-(junction (pt 128 424))
-(junction (pt 128 408))
 (junction (pt 128 72))
 (junction (pt 128 648))
 (junction (pt 128 632))
