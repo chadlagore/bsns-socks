@@ -109,6 +109,10 @@ architecture bhvr of GraphicsController is
 	Signal	x1_inc																							: Std_Logic ;
 	Signal	err_ctrl																						: Std_Logic_Vector(1 downto 0);
 
+	-- horizontal and vertical signals
+	Signal y1_inc_1	: Std_Logic;
+	Signal x1_inc_1	: Std_Logic;
+
 	-- Signal to tell the graphics controller when it is safe to read/write to the graphcis memory
 	-- this is when the display controller is not actually accessing the memory to display it's contents to the screen
 	-- i.e. during a horizontal sync period
@@ -267,8 +271,7 @@ Begin
 		if(Reset_L = '0') then
 			X1 <= X"0000" ;
 		elsif(rising_edge(Clk)) then
-			if(CurrentState = DrawHline and NextState = DrawHline) then
-				-- horizontal increment.
+			if(x1_inc_1 = '1') then
 				X1 <= X1 + 1;
 			elsif(x1_inc = '1') then
 				X1 <= X1 + sx_data;
@@ -296,8 +299,7 @@ Begin
 		if(Reset_L = '0') then
 			Y1 <= X"0000" ;
 		elsif(rising_edge(Clk)) then
-			if(CurrentState = DrawVline and NextState = DrawVline) then
-				-- vertical increment.
+			if(y1_inc_1 = '1') then
 				Y1 <= Y1 + 1;
 			elsif(y1_inc = '1') then
 				Y1 <= Y1 + sy_data;
@@ -517,7 +519,8 @@ Begin
 				when "00" =>		err <= dx_data - dy_data;
 				when "01" => 	err <= err - dy_data;
 				when "10" => 	err <= err + dx_data;
-				when others => 	err <= X"0000";
+				when "11" => 	err <= err;
+				when others => 	err <= err;
 			end case;
 		end if;
 	end process;
@@ -581,8 +584,6 @@ Begin
 	process(CurrentState, CommandWritten_H, Command, X1, X2, Y1, Y2, Colour, VSync_L,
 				BackGroundColour, AS_L, Sram_DataIn, CLK, Colour_Latch)
 				variable neg_dy : signed(31 downto 0);
-				variable dx_curr : signed(15 downto 0);
-				variable dy_curr : signed(15 downto 0);
 	begin
 
 	----------------------------------------------------------------------------------------------------------------------------------
@@ -609,6 +610,10 @@ Begin
 		Sig_ColourPalletteAddr			<= X"00";				-- default address to the colour pallette
 		Sig_ColourPalletteData			<= X"00000000" ;		-- default 00RRGGBB value to the colour pallette
 		Sig_ColourPallette_WE_H			<= '0'; 					-- default is NO write to the colour pallette
+
+		-- Drawing lines.
+		y1_inc_1 <= '0';
+		x1_inc_1 <= '0';
 
 		-------------------------------------------------------------------------------------
 		-- IMPORTANT we have to define what the default NEXT state will be. In this case we the state machine
@@ -762,7 +767,9 @@ Begin
 			-- the data that we write comes from the default value assigned to Sig_DataOut previously
 			-- you will recall that this is the value of the Colour register
 
-      if (X1 >= X2) then
+			x1_inc_1 <= '1';
+
+      if (X1 = X2) then
          -- we are done.
 			   NextState <= IDLE;
 			else
@@ -785,7 +792,9 @@ Begin
 			-- the data that we write comes from the default value assigned to Sig_DataOut previously
 			-- you will recall that this is the value of the Colour register
 
-			if (Y1 >= Y2) then
+			y1_inc_1 <= '1';
+
+			if (Y1 = Y2) then
 				 -- we are done.
 				 NextState <= IDLE;
 			else
@@ -827,9 +836,7 @@ Begin
 
 			e2_update <= '1';
 			y1_inc <= '0';
-
-			dx_curr := abs(signed(X2 - X1));
-			dx_curr := abs(signed(Y2 - Y1));
+			err_ctrl <= B"11";
 
 			if(X1 = X2) and (Y1 = Y2) then
 				NextState <= Idle;
@@ -840,11 +847,16 @@ Begin
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	elsif(CurrentState = DrawLine3) then
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 			neg_dy := NegativeOne * dy_data;
+			e2_update <= '0';
 
 			if(e2 > neg_dy) then
 				err_ctrl <= B"01"; -- err = err - dy
 				x1_inc <= '1'; -- x1 = x1 + sx_data
+			else
+				err_ctrl <= B"11";
+				x1_inc <= '0';
 			end if;
 
 			if(X1 = X2) and (Y1 = Y2) then
@@ -862,6 +874,9 @@ Begin
 			if(e2 < dx_data) then
 				err_ctrl <= B"10";
 				y1_inc <= '1';
+			else
+				err_ctrl <= B"11";
+				y1_inc <= '0';
 			end if;
 
 			if(X1 = X2) and (Y1 = Y2) then

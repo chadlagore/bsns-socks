@@ -71,7 +71,6 @@ module GraphicsController_tb();
 			#10 clk = 1;
       Reset_L = 1;
 			#10 clk = 0;
-      LDS_L = 1;
       AS_L = 1;
 			#10 clk = 1;
 			#10 clk = 0;
@@ -80,14 +79,23 @@ module GraphicsController_tb();
       #10 clk = 1;
       #10 clk = 0;
 
-			// Load X1 //
-			AS_L = 0;
-			AddressIn = 8'b00000010; // Specify X1_Select
+			// Load X2. //
+			AS_L = 1;
+			DataInFromCPU = 100; // Process command.
+			AddressIn = 8'b00000010; // Specify X2_Select
 			#10 clk = 1;
 			#10 clk = 0;
-			LDS_L = 0;
+			// This is X2 data (8)
+			AS_L = 0;
+			#10 clk = 1;
+			#10 clk = 0;
+			AS_L = 1;
+			#10 clk = 1;
+			#10 clk = 0;
+
 			// Load Y1.
 			AS_L = 1;
+			DataInFromCPU = 0; // Process command.
 			AddressIn = 8'b00000100; // Specify Y1_Select
 			#10 clk = 1;
 			#10 clk = 0;
