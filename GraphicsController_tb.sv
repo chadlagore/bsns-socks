@@ -81,7 +81,7 @@ module GraphicsController_tb();
 
 			// Load X2. //
 			AS_L = 1;
-			DataInFromCPU = 100; // Process command.
+			DataInFromCPU = 800; // Process command.
 			AddressIn = 8'b00000010; // Specify X2_Select
 			#10 clk = 1;
 			#10 clk = 0;
@@ -109,7 +109,7 @@ module GraphicsController_tb();
 			#10 clk = 1;
 			#10 clk = 0;
       // This is X2 data (8)
-			DataInFromCPU = 800;
+			DataInFromCPU = 0;
 			AS_L = 0;
 			#10 clk = 1;
 			#10 clk = 0;
