@@ -101,7 +101,7 @@ module GraphicsController_tb();
 			#10 clk = 1;
 			#10 clk = 0;
       // This is X2 data (8)
-			DataInFromCPU = 16'b0000000000100000;
+			DataInFromCPU = 800;
 			AS_L = 0;
 			#10 clk = 1;
 			#10 clk = 0;
@@ -115,7 +115,7 @@ module GraphicsController_tb();
 			#10 clk = 1;
 			#10 clk = 0;
       // This is Y2 data (6)
-			DataInFromCPU = 16'b0000000000011000;
+			DataInFromCPU = 500;
 			AS_L = 0;
 			#10 clk = 1;
 			#10 clk = 0;
@@ -123,10 +123,10 @@ module GraphicsController_tb();
       #10 clk = 1;
 			#10 clk = 0;
 
-			// Send HLine command //
+			// Send Line command //
       AS_L = 0;
 			AddressIn = 8'b00000000; // Specify command select.
-      DataInFromCPU = 16'b0000000000000010; // Draw VLINE
+      DataInFromCPU = 16'b0000000000000011; // Draw LINE
       // Should push to state three.
 			#10 clk = 1;
 			#10 clk = 0;

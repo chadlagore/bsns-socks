@@ -92,6 +92,23 @@ architecture bhvr of GraphicsController is
 	Signal	Sig_ColourPalletteData															: Std_Logic_Vector(31 downto 0) ;
 	Signal	Sig_ColourPallette_WE_H															: Std_Logic;
 
+	-- Bresenhams Signals
+	Signal	dx_data																							: signed(15 downto 0) ;
+	Signal	dy_data																							: signed(15 downto 0) ;
+	Signal	sx_data																							: Std_Logic_Vector(15 downto 0) ;
+	Signal	sy_data																							: Std_Logic_Vector(15 downto 0) ;
+	Signal	err																									: signed(15 downto 0) ;
+	Signal	e2																									: signed(31 downto 0) ;
+
+	Signal	dx_init																							: Std_Logic ;
+	Signal	dy_init																							: Std_Logic ;
+	Signal	sx_init																							: Std_Logic ;
+	Signal	sy_init																							: Std_Logic ;
+	Signal	e2_update																						: Std_Logic ;
+	Signal	y1_inc																							: Std_Logic ;
+	Signal	x1_inc																							: Std_Logic ;
+	Signal	err_ctrl																						: Std_Logic_Vector(1 downto 0);
+
 	-- Signal to tell the graphics controller when it is safe to read/write to the graphcis memory
 	-- this is when the display controller is not actually accessing the memory to display it's contents to the screen
 	-- i.e. during a horizontal sync period
@@ -123,7 +140,11 @@ Signal Sig_Count :Std_Logic_Vector(10 downto 0); --- 10 bits can count to 1024
 	constant ReadPixel							 	: Std_Logic_Vector(7 downto 0) := X"06";		-- State for reading a pixel
 	constant ReadPixel1							 	: Std_Logic_Vector(7 downto 0) := X"07";		-- State for reading a pixel
 	constant ReadPixel2							 	: Std_Logic_Vector(7 downto 0) := X"08";		-- State for reading a pixel
-	constant PalletteReProgram						: Std_Logic_Vector(7 downto 0) := X"09";		-- State for programming a pallette
+	constant PalletteReProgram				: Std_Logic_Vector(7 downto 0) := X"09";		-- State for programming a pallette
+	constant DrawLine1								: Std_Logic_Vector(7 downto 0) := X"0a";		-- State for initializing err.
+	constant DrawLine2								: Std_Logic_Vector(7 downto 0) := X"0b";		-- State for for loop.
+	constant DrawLine3								: Std_Logic_Vector(7 downto 0) := X"0c";		-- State for x update.
+	constant DrawLine4								: Std_Logic_Vector(7 downto 0) := X"0d";		-- State for y update.
 
 	-- add any extra states you need here for example to draw lines etc.
 -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -135,6 +156,12 @@ Signal Sig_Count :Std_Logic_Vector(10 downto 0); --- 10 bits can count to 1024
 	constant	PutPixel									: Std_Logic_Vector(15 downto 0) := X"000a";	-- command to Graphics chip from NIOS to draw a pixel
 	constant	GetPixel									: Std_Logic_Vector(15 downto 0) := X"000b";	-- command to Graphics chip from NIOS to read a pixel
 	constant ProgramPallette						: Std_Logic_Vector(15 downto 0) := X"0010";	-- command to Graphics chip from NIOS is program one of the pallettes with a new RGB value
+
+	-- Bresenhams constants.
+	constant PositiveOne	: signed(15 downto 0) := X"0001";
+	constant NegativeOne	: signed(15 downto 0) := X"FFFF";
+	constant thresh : signed(15 downto 0) := X"0003";
+
 Begin
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -243,7 +270,8 @@ Begin
 			if(CurrentState = DrawHline and NextState = DrawHline) then
 				-- horizontal increment.
 				X1 <= X1 + 1;
-			-- elsif(CurrentState = DrawLine and NextState = DrawLine) then -- bresenhams algo.
+			elsif(x1_inc = '1') then
+				X1 <= X1 + sx_data;
 			end if;
 			if(X1_Select_H = '1') then
 				if(UDS_L = '0') then
@@ -271,6 +299,8 @@ Begin
 			if(CurrentState = DrawVline and NextState = DrawVline) then
 				-- vertical increment.
 				Y1 <= Y1 + 1;
+			elsif(y1_inc = '1') then
+				Y1 <= Y1 + sy_data;
 			end if;
 			if(Y1_Select_H = '1') then
 				if(UDS_L = '0') then
@@ -406,6 +436,107 @@ Begin
 		end if;
 	end process;
 
+------------------------------------------------------------------------------------------------------------------------------
+-- dx Update Process
+------------------------------------------------------------------------------------------------------------------------------
+	process(Clk, Reset_L)
+	Begin
+		if(Reset_L = '0') then
+			dx_data <= X"0000";
+		elsif(rising_edge(Clk)) then
+			if(dx_init = '1') then
+				dx_data <= abs(signed(X2 - X1));
+			end if ;
+		end if;
+	end process;
+
+------------------------------------------------------------------------------------------------------------------------------
+-- dy Update Process
+------------------------------------------------------------------------------------------------------------------------------
+	process(Clk, Reset_L)
+	Begin
+		if(Reset_L = '0') then
+			dy_data <= X"0000";
+		elsif(rising_edge(Clk)) then
+			if(dy_init = '1') then
+				dy_data <= abs(signed(Y2 - Y1));
+			end if ;
+		end if;
+	end process;
+
+------------------------------------------------------------------------------------------------------------------------------
+-- sx Update Process
+------------------------------------------------------------------------------------------------------------------------------
+
+	process(Clk, Reset_L)
+	Begin
+		if(Reset_L = '0') then
+			sx_data <= X"0000";
+		elsif(rising_edge(Clk)) then
+			if(sx_init = '1') then
+				if (X1 < X2) then
+					sx_data <= X"0001";
+				elsif (X1 > X2) then
+					sx_data <= X"FFFF";
+				else
+					sx_data <= X"0000";
+				end if;
+			end if;
+		end if;
+	end process;
+
+------------------------------------------------------------------------------------------------------------------------------
+-- sy Update Process
+------------------------------------------------------------------------------------------------------------------------------
+	process(Clk, Reset_L)
+	Begin
+		if(Reset_L = '0') then
+			sy_data <= X"0000";
+		elsif(rising_edge(Clk)) then
+			if(sy_init = '1') then
+				if (Y1 < Y2) then
+					sy_data <= X"0001";
+				elsif (Y1 > Y2) then
+					sy_data <= X"FFFF";
+				else
+					sy_data <= X"0000";
+				end if;
+			end if;
+		end if;
+	end process;
+
+------------------------------------------------------------------------------------------------------------------------------
+-- err Update Process
+------------------------------------------------------------------------------------------------------------------------------
+	process(Clk, Reset_L)
+	Begin
+		if(Reset_L = '0') then
+			err <= X"0000";
+		elsif(rising_edge(Clk)) then
+			case err_ctrl is
+				when "00" =>		err <= dx_data - dy_data;
+				when "01" => 	err <= err - dy_data;
+				when "10" => 	err <= err + dx_data;
+				when others => 	err <= X"0000";
+			end case;
+		end if;
+	end process;
+
+------------------------------------------------------------------------------------------------------------------------------
+-- e2 Update Process
+------------------------------------------------------------------------------------------------------------------------------
+	process(Clk, Reset_L)
+		variable two : signed(15 downto 0) := X"0002";
+	Begin
+		if(Reset_L = '0') then
+			e2 <= X"0000_0000";
+		elsif(rising_edge(Clk)) then
+			if(e2_update = '1') then
+				e2 <= two * err;
+			end if ;
+		end if;
+	end process;
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --	State Machine Registers and XY clipper prevents write if off the screen
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -449,6 +580,9 @@ Begin
 
 	process(CurrentState, CommandWritten_H, Command, X1, X2, Y1, Y2, Colour, VSync_L,
 				BackGroundColour, AS_L, Sram_DataIn, CLK, Colour_Latch)
+				variable neg_dy : signed(31 downto 0);
+				variable dx_curr : signed(15 downto 0);
+				variable dy_curr : signed(15 downto 0);
 	begin
 
 	----------------------------------------------------------------------------------------------------------------------------------
@@ -661,7 +795,27 @@ Begin
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		elsif(CurrentState = DrawLine) then
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-			-- TODO in your project
+
+			dx_init <= '1';
+			dy_init <= '1';
+			sx_init <= '1';
+			sy_init <= '1';
+
+			NextState <= DrawLine1;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	elsif(CurrentState = DrawLine1) then
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			dx_init <= '0';
+			dy_init <= '0';
+
+			err_ctrl <= B"00";
+
+			NextState <= DrawLine2;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	elsif(CurrentState = DrawLine2) then
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			Sig_AddressOut 	<= Y1(8 downto 0) & X1(9 downto 1);				-- 9 bit x address even though it goes up to 1024 which would mean 10 bits, because each address = 2 pixels/bytes
 			Sig_RW_Out			<= '0';													-- we are intending to draw a pixel so set RW to '0' for a write to memory
 
@@ -671,14 +825,49 @@ Begin
 				Sig_LDS_Out_L 	<= '0';													-- else write to lower half of Sram data bus to get the other pixel at that address
 			end if;
 
-			-- the data that we write comes from the default value assigned to Sig_DataOut previously
-			-- you will recall that this is the value of the Colour register
+			e2_update <= '1';
+			y1_inc <= '0';
 
-			if (Y1 >= Y2 and X2 >= X1) then
-				 -- we are done.
-				 NextState <= IDLE;
+			dx_curr := abs(signed(X2 - X1));
+			dx_curr := abs(signed(Y2 - Y1));
+
+			if(X1 = X2) and (Y1 = Y2) then
+				NextState <= Idle;
 			else
-				 NextState <= DrawLine;
+				NextState <= DrawLine3;
+			end if;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	elsif(CurrentState = DrawLine3) then
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			neg_dy := NegativeOne * dy_data;
+
+			if(e2 > neg_dy) then
+				err_ctrl <= B"01"; -- err = err - dy
+				x1_inc <= '1'; -- x1 = x1 + sx_data
+			end if;
+
+			if(X1 = X2) and (Y1 = Y2) then
+				NextState <= Idle;
+			else
+				NextState <= DrawLine4;
+			end if;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	elsif(CurrentState = DrawLine4) then
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+			x1_inc <= '0';
+
+			if(e2 < dx_data) then
+				err_ctrl <= B"10";
+				y1_inc <= '1';
+			end if;
+
+			if(X1 = X2) and (Y1 = Y2) then
+				NextState <= Idle;
+			else
+				NextState <= DrawLine2;
 			end if;
 
 		end if ;
