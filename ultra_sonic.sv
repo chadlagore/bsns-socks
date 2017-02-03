@@ -37,7 +37,7 @@ module ultra_sonic(
   input logic read_en;
   input logic write_en;
   input logic [31:0] write_data;
-  input logic [31:0] read_data;
+  output logic [31:0] read_data;
 
   // State
   logic [9:0] state;
@@ -111,12 +111,11 @@ module ultra_sonic(
     else count_out <= count_out;
   end
 
-  always_comb
+  always_ff @(posedge clk or negedge reset_all)
   begin
-    if(addr)
-      read_data <= count_out;
-    else
-      read_data <= {31'b0, count_ready_out};
+    if(~reset_all) read_data <= 32'b0;
+    else if(addr) read_data <= count_out;
+    else read_data <= {31'b0, count_ready_out};
   end
 
 endmodule

@@ -1,33 +1,37 @@
-
+`default_nettype none
 module ultra_sonic_tb();
   // Inputs from nios.
-  logic clk, reset, start;
+  logic clk, reset, start, addr;
 
   // Inputs from sensor.
   logic echo_high;
 
   // Outputs to nios
   logic count_ready, active;
-  logic [22:0] count_out;
+  logic [31:0] read, write;
 
   // Outputs to sensor
   logic pulse_out;
 
   ultra_sonic DUT(
-    // inputs
-    .clk(clk),
-    .reset_all(~reset),
+      // inputs
+      .clk(clk),
+      .reset_all(~reset),
 
-    // input from sensor.
-    .echo_high(echo_high),
+      // input from sensor.
+      .echo_high(echo_high),
+      .pulse_out(pulse_out),
 
-    // outputs
-    .count_ready_out(count_ready),
-    .count_out(count_out),
-    .pulse_out(pulse_out)
+      // outputs
+      .addr(addr),
+      .read_en(1'b1),
+      .write_en(1'b1),
+      .write_data(write),
+      .read_data(read)
     );
 
-  initial begin
+  always begin
+    addr = 1;
     reset = 1;
     #1 clk = 0;
     #1 clk = 1;
@@ -59,6 +63,10 @@ module ultra_sonic_tb();
     end
 
     echo_high = 0;
+
+    for (int i = 0; i < 750; i++) begin
+      #1 clk = ~clk;
+    end
 
   end
 endmodule
