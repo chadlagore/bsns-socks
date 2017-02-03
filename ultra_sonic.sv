@@ -96,6 +96,12 @@ module ultra_sonic(
         endcase
   end
 
+  // Signal starts.
+  always_ff @(posedge echo_high)
+  begin
+    if (echo_high) count_out <= 0;
+  end
+
   // Wait counter
   always_ff @(posedge clk or negedge reset_all)
   begin
@@ -108,7 +114,7 @@ module ultra_sonic(
   always_ff @(posedge clk or negedge reset_all)
   begin
     if (~reset_all) count_out <= {COUNT_WIDTH{0}};
-    else if (posedge echo_high) count_out <= count_out + 1'b1;
+    else if (echo_high) count_out <= count_out + 1'b1;
     else count_out <= count_out;
   end
 
