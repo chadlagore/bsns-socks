@@ -51,17 +51,19 @@ module ultra_sonic(
   parameter init_pulse        = 10'b0001_100011;
   parameter wait_for_echo     = 10'b0011_110001;
   parameter on_echo           = 10'b0100_101001;
+  parameter head_to_echo      = 10'b0101_000101;
 
   // Logic.
   logic trigger_in;
   logic [DELAY_WIDTH-1:0] delay_pulse_count;
   logic counting_echo;
   logic waiting_for_echo;
+  logic reset_echo_count;
 
   // Outputs.
   assign active_out = state[0];
   assign pulse_out = state[1];
-  // Reserved for state[2]
+  assign reset_echo_count = state[2];
   assign counting_echo = state[3];
   assign waiting_for_echo = state[4];
   assign count_ready_out = ~echo_high; // cout available when echo low.
@@ -85,8 +87,12 @@ module ultra_sonic(
                      end
         /////// WAIT_FOR_ECHO STATE ////////
         wait_for_echo:  begin
-                          if (echo_high == 1'b1) state <= on_echo;
+                          if (echo_high == 1'b1) state <= head_to_echo;
                           else state <= wait_for_echo;
+                        end
+        /////// WAIT_FOR_ECHO STATE ////////
+        head_to_echo:  begin
+                          state <= on_echo;
                         end
         /////// ON_ECHO STATE ////////
         on_echo:  begin
@@ -94,12 +100,6 @@ module ultra_sonic(
                       else state <= on_echo;
                   end
         endcase
-  end
-
-  // Signal starts.
-  always_ff @(posedge echo_high)
-  begin
-    if (echo_high) count_out <= 0;
   end
 
   // Wait counter
@@ -114,6 +114,7 @@ module ultra_sonic(
   always_ff @(posedge clk or negedge reset_all)
   begin
     if (~reset_all) count_out <= {COUNT_WIDTH{0}};
+    else if (reset_echo_count) count_out <= 0;
     else if (echo_high) count_out <= count_out + 1'b1;
     else count_out <= count_out;
   end
