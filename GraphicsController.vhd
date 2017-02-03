@@ -535,6 +535,7 @@ Begin
 			e2 <= X"0000_0000";
 		elsif(rising_edge(Clk)) then
 			if(e2_update = '1') then
+				two := X"0002";
 				e2 <= two * err;
 			end if ;
 		end if;
@@ -582,7 +583,7 @@ Begin
 ----------------------------------------------------------------------------------------------------------------------
 
 	process(CurrentState, CommandWritten_H, Command, X1, X2, Y1, Y2, Colour, VSync_L,
-				BackGroundColour, AS_L, Sram_DataIn, CLK, Colour_Latch)
+					BackGroundColour, AS_L, Sram_DataIn, CLK, Colour_Latch, e2, dx_data, dy_data)
 				variable neg_dy : signed(31 downto 0);
 	begin
 
@@ -614,6 +615,14 @@ Begin
 		-- Drawing lines.
 		y1_inc_1 <= '0';
 		x1_inc_1 <= '0';
+		y1_inc <= '0';
+		x1_inc <= '0';
+		sx_init <= '0';
+		sy_init <= '0';
+		err_ctrl <= B"00";
+		e2_update <= '0';
+		dx_init <= '0';
+		dy_init <= '0';
 
 		-------------------------------------------------------------------------------------
 		-- IMPORTANT we have to define what the default NEXT state will be. In this case we the state machine

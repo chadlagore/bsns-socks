@@ -134,7 +134,7 @@ module GraphicsController_tb();
 			// Send Line command //
       AS_L = 0;
 			AddressIn = 8'b00000000; // Specify command select.
-      DataInFromCPU = 16'b0000000000000011; // Draw LINE
+      DataInFromCPU = 16'b0000000000000010; // Draw LINE
       // Should push to state three.
 			#10 clk = 1;
 			#10 clk = 0;
