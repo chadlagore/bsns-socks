@@ -17,14 +17,12 @@ module ultra_sonic_tb();
     // inputs
     .clk(clk),
     .reset_all(~reset),
-    .start(start),
 
     // input from sensor.
     .echo_high(echo_high),
 
     // outputs
     .count_ready_out(count_ready),
-    .active_out(active),
     .count_out(count_out),
     .pulse_out(pulse_out)
     );

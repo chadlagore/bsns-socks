@@ -8,40 +8,34 @@ module ultra_sonic(
     // INPUTS //
     clk, // 50MHz
     reset_all,
-    start, // Input to initialize send pulse.
     echo_high, // Recieving data from sensor.
 
     // OUTPUTS //
     count_out, // Number of clock cycles trigger held high.
     pulse_out, // Output pulse to initialize state machine.
-    count_ready_out, // Distance is ready.
-    active_out // Device is not idle.
+    count_ready_out, // Distance is ready
+
+    // MEMORY_MAP ////
+    addr
+
   );
-  parameter COUNT_WIDTH = 23;
+  parameter COUNT_WIDTH = 32;
   parameter DELAY_WIDTH = 8;
 
   //// INPUTS ////
-  input clk, reset_all;
-  logic clk, reset_all;
+  input logic clk, reset_all;
 
-  input start;
-  logic start;
-
-  input echo_high;
-  logic echo_high;
+  input logic echo_high;
 
   //// OUTPUTS ////
-  output [COUNT_WIDTH-1:0] count_out;
-  logic [COUNT_WIDTH-1:0] count_out;
+  output logic [COUNT_WIDTH-1:0] count_out;
 
-  output count_ready_out;
-  logic count_ready_out;
+  output logic count_ready_out;
 
-  output pulse_out;
-  logic pulse_out;
+  output logic pulse_out;
 
-  output active_out;
-  logic active_out;
+  // MEMORY_MAP ////
+  input logic addr;
 
   // State
   logic [9:0] state;
@@ -61,7 +55,6 @@ module ultra_sonic(
   logic reset_echo_count;
 
   // Outputs.
-  assign active_out = state[0];
   assign pulse_out = state[1];
   assign reset_echo_count = state[2];
   assign counting_echo = state[3];
@@ -77,8 +70,7 @@ module ultra_sonic(
       case(state)
         /////// IDLE STATE ////////
         idle: begin
-                if (start) state <= init_pulse;
-                else state <= idle;
+                state <= init_pulse;
               end
         /////// INIT_PULSE STATE ////////
         init_pulse:  begin
