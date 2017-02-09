@@ -22,9 +22,9 @@ module ultra_sonic(
   parameter STATE_BITS = 7;
   parameter COUNT_WIDTH = 32;
   // Delay for 20us: 10bits = lg(1025 cycles).
-  parameter DELAY_WIDTH = 10;
+  parameter TRIGGER_WIDTH = 9;
   // Delay for 60ms: 22bits = lg(2000000 cycles).
-  parameter STALL_WIDTH = 10;
+  parameter STALL_WIDTH = 21;
 
   //// INPUTS ////
   input logic clk, reset_l;
@@ -52,7 +52,7 @@ module ultra_sonic(
 
   // Logic.
   logic [COUNT_WIDTH-1:0] count_out;
-  logic [DELAY_WIDTH-1:0] delay_trigger_count;
+  logic [TRIGGER_WIDTH-1:0] delay_trigger_count;
   logic [STALL_WIDTH-1:0] stall_count;
 
   // Outputs.
@@ -72,17 +72,15 @@ module ultra_sonic(
               end
         // Count trigger high for 20us.
         init_trigger:  begin
-                      if (delay_trigger_count == 0) state <= wait_for_echo;
+                      if (delay_trigger_count == 1'b0) state <= wait_for_echo;
                       else state <= init_trigger;
                      end
         // Wait for echo to go high.
         wait_for_echo:  begin
-                          if (echo == 1'b1) state <= head_to_echo;
+                          if (echo == 1'b1) state <= on_echo;
                           else state <= wait_for_echo;
                         end
-        // Echo high start counting.
         head_to_echo: state <= on_echo;
-
         // Waiting for echo to go low.
         on_echo:  begin
                       if (echo == 1'b0) state <= data_ready;
@@ -102,9 +100,9 @@ module ultra_sonic(
   always_ff @(posedge clk or negedge reset_l)
   begin
     if (~reset_l)
-      delay_trigger_count <= {{DELAY_WIDTH{1'b0}}, 1'b1};
+      delay_trigger_count <= {{TRIGGER_WIDTH{1'b0}}, 1'b1};
     else if (state == stall) // reset trigger counter on stall.
-      delay_trigger_count <= {{(DELAY_WIDTH-1){0}}, 1'b1};
+      delay_trigger_count <= {{(TRIGGER_WIDTH-1){1'b0}}, 1'b1};
     else if (state == init_trigger) // increment trigger counter on trigger.
       delay_trigger_count <= delay_trigger_count + 1'b1;
     else
