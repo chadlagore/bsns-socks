@@ -47,7 +47,8 @@ module ultra_sonic(
   parameter wait_for_echo     = 6'b0011_00;
   parameter on_echo           = 6'b0100_00;
   parameter head_to_echo      = 6'b0101_00;
-  parameter stall             = 6'b0110_10;
+  parameter data_ready        = 6'b0110_10;
+  parameter stall             = 6'b0111_00;
 
   // Logic.
   logic [COUNT_WIDTH-1:0] count_out;
@@ -84,9 +85,11 @@ module ultra_sonic(
 
         // Waiting for echo to go low.
         on_echo:  begin
-                      if (echo == 1'b0) state <= stall;
+                      if (echo == 1'b0) state <= data_ready;
                       else state <= on_echo;
                   end
+
+        data_ready: state <= stall;
         // Waiting for 60ms to be safe.
         stall:  begin
                       if (stall_count == 1'b0) state <= init_trigger;
@@ -95,14 +98,14 @@ module ultra_sonic(
         endcase
   end
 
-  // Wait counter
+  // Trigger counter
   always_ff @(posedge clk or negedge reset_l)
   begin
     if (~reset_l)
       delay_trigger_count <= {{DELAY_WIDTH{0}}, 1'b1};
-    else if (state == stall)
+    else if (state == stall) // reset trigger counter on stall.
       delay_trigger_count <= {{(DELAY_WIDTH-1){0}}, 1'b1};
-    else if (state == init_trigger)
+    else if (state == init_trigger) // increment trigger counter on trigger.
       delay_trigger_count <= delay_trigger_count + 1'b1;
     else
       delay_trigger_count <= delay_trigger_count;
