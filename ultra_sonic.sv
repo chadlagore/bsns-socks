@@ -63,27 +63,28 @@ module ultra_sonic(
   // State logic.
   always_ff @(posedge clk or negedge reset_l)
   begin
-    if(~reset_l)
-      state <= idle;
+    if(~reset_l) state <= idle;
     else
       case(state)
-        idle: begin
-                state <= init_trigger;
-              end
+        idle: state <= init_trigger;
         // Count trigger high for 20us.
         init_trigger:  begin
                       if (delay_trigger_count == 1'b0) state <= wait_for_echo;
                       else state <= init_trigger;
                      end
+
         // Wait for echo to go high.
         wait_for_echo:  begin
                           if (echo == 1'b1) state <= on_echo;
                           else state <= wait_for_echo;
                         end
+
         head_to_echo: state <= on_echo;
         // Waiting for echo to go low.
         on_echo:  begin
                       if (echo == 1'b0) state <= data_ready;
+                      else if (count_out == {COUNT_WIDTH{1'b0}})
+                        state <= stall;
                       else state <= on_echo;
                   end
 
@@ -93,6 +94,7 @@ module ultra_sonic(
                       if (stall_count == 1'b0) state <= init_trigger;
                       else state <= stall;
                   end
+        default: state <= idle;
         endcase
   end
 
@@ -100,7 +102,7 @@ module ultra_sonic(
   always_ff @(posedge clk or negedge reset_l)
   begin
     if (~reset_l)
-      delay_trigger_count <= {{TRIGGER_WIDTH{1'b0}}, 1'b1};
+      delay_trigger_count <= {{(TRIGGER_WIDTH-1){1'b0}}, 1'b1};
     else if (state == stall) // reset trigger counter on stall.
       delay_trigger_count <= {{(TRIGGER_WIDTH-1){1'b0}}, 1'b1};
     else if (state == init_trigger) // increment trigger counter on trigger.
@@ -113,7 +115,7 @@ module ultra_sonic(
   always_ff @(posedge clk or negedge reset_l)
   begin
     if (~reset_l) count_out <= {COUNT_WIDTH{1'b0}};
-    else if (state == init_trigger) count_out <= {{COUNT_WIDTH{1'b0}}, 1'b1};
+    else if (state == init_trigger) count_out <= {{(COUNT_WIDTH-1){1'b0}}, 1'b1};
     else if (echo) count_out <= count_out + {{(COUNT_WIDTH-1){1'b0}}, 1'b1};
     else count_out <= count_out;
   end
@@ -122,7 +124,7 @@ module ultra_sonic(
   always_ff @(posedge clk or negedge reset_l)
   begin
     if (~reset_l) stall_count <= {STALL_WIDTH{1'b0}};
-    else if (state == init_trigger) stall_count <= {{STALL_WIDTH{1'b0}}, 1'b1};
+    else if (state == init_trigger) stall_count <= {{(STALL_WIDTH-1){1'b0}}, 1'b1};
     else if (state == stall)
       stall_count <= stall_count + {{(STALL_WIDTH-1){1'b0}}, 1'b1};
     else stall_count <= stall_count;
