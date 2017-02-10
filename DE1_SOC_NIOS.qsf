@@ -964,8 +964,8 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING ON
 set_global_assignment -name FITTER_EFFORT "AUTO FIT"
+set_global_assignment -name SYSTEMVERILOG_FILE avalon_distance_module_interface.sv
 set_global_assignment -name QIP_FILE nios_system.qip
-set_global_assignment -name VERILOG_FILE nios_system.v
 set_global_assignment -name QSYS_FILE nios_system.qsys
 set_global_assignment -name VHDL_FILE ACIA_6850.vhd
 set_global_assignment -name VHDL_FILE ACIA_RX.vhd

@@ -334,22 +334,6 @@ agreement for further details.
 	)
 	(flipy)
 )
-(pin
-	(output)
-	(rect 2064 1320 2240 1336)
-	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "LEDR[0]" (rect 90 0 132 12)(font "Arial" ))
-	(pt 0 8)
-	(drawing
-		(line (pt 0 8)(pt 52 8))
-		(line (pt 52 4)(pt 78 4))
-		(line (pt 52 12)(pt 78 12))
-		(line (pt 52 12)(pt 52 4))
-		(line (pt 78 4)(pt 82 8))
-		(line (pt 82 8)(pt 78 12))
-		(line (pt 78 12)(pt 82 8))
-	)
-)
 (symbol
 	(rect 616 712 664 744)
 	(text "NOT" (rect 1 0 21 10)(font "Arial" (font_size 6)))
@@ -2701,22 +2685,6 @@ agreement for further details.
 	(pt 2784 832)
 )
 (connector
-	(pt 2016 1296)
-	(pt 2016 1328)
-)
-(connector
-	(pt 2016 1328)
-	(pt 2064 1328)
-)
-(connector
-	(pt 1952 1296)
-	(pt 2016 1296)
-)
-(connector
-	(pt 2016 1296)
-	(pt 2064 1296)
-)
-(connector
 	(pt 120 632)
 	(pt 128 632)
 )
@@ -2784,6 +2752,10 @@ agreement for further details.
 	(pt 528 520)
 	(pt 1672 520)
 )
+(connector
+	(pt 1952 1296)
+	(pt 2064 1296)
+)
 (junction (pt 856 872))
 (junction (pt 832 808))
 (junction (pt 744 712))
@@ -2846,4 +2818,3 @@ agreement for further details.
 (junction (pt 2816 864))
 (junction (pt 2272 648))
 (junction (pt 2824 800))
-(junction (pt 2016 1296))
