@@ -20,18 +20,21 @@ module avalon_distance_module_interface
 	output logic [15:0] read_data,
 
 	// ultrasonic distance sensor outputs
-	output logic trigger
+	output logic trigger,
+	output logic got_request,
+	output logic [15:0] data_out
+	
 );
 
 // status and data memory locations
-parameter STATUS = 3'h0904;
-parameter DATA_OUT = 3'h0900;
+parameter STATUS = 16'h0904;
+parameter DATA_OUT = 16'h0900;
 
 // internal wires
 logic status_out;
-logic [15:0] data_out;
+//logic [15:0] data_out;
 logic dist_mod_status;
-logic [15:0] dist_mod_data;
+logic [31:0] dist_mod_data;
 
 // instantiation of dist sensor fsm
 ultra_sonic us(
@@ -58,7 +61,7 @@ always @(posedge clk, negedge reset_l) begin
 	// asynchronous reset from push button
 	if (~reset_l) data_out = 16'b0;
 	// if distance module status is high, we have a new reading
-	else if (dist_mod_status == 1) data_out <= dist_mod_data;
+	else if (dist_mod_status == 1) data_out <= dist_mod_data[15:0];
 	// otherwise simply output the same signal
 	else data_out <= data_out;
 end
@@ -74,4 +77,9 @@ always @(posedge clk, negedge reset_l) begin
 	else read_data <= 16'bZ;
 end // end output conditional statements
 
+always @(posedge clk, negedge reset_l) begin
+	if (~reset_l) got_request <= 1'b0;
+	else if (address == DATA_OUT) got_request <= 1'b1;
+	else got_request <= got_request;
+end
 endmodule

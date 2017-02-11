@@ -7,7 +7,7 @@ module ultra_sonic_tb();
   logic [31:0] read;
   logic echo, trigger, read_data_valid;
   logic [15:0] address;
-  logic [9:0] leds;
+  //logic [9:0] leds;
 
   avalon_distance_module_interface DUT(
       // inputs
@@ -20,8 +20,8 @@ module ultra_sonic_tb();
       .read_data(read),
 
       .echo(echo),
-      .trigger(trigger),
-      .LEDR(leds)
+      .trigger(trigger)
+      //.LEDR(leds)
     );
 
   initial begin
@@ -33,7 +33,7 @@ module ultra_sonic_tb();
     #1 clk = 0;
     #1 clk = 1;
 
-    for(int j=0; j < 5; j++) begin
+    for(int j=0; j < 1; j++) begin
       // Trigger high, low and wait.
       for (int i = 0; i < 1500; i++) begin
         #1 clk = ~clk;
