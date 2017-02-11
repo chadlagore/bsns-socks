@@ -16,7 +16,7 @@ ENTITY NIOS_II_SYSTEM IS
 		
 		-- RED LEDs and Switches
 		SW 				: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
-		LEDR 				: OUT STD_LOGIC_VECTOR (9 DOWNTO 0);
+		LEDR 				: OUT STD_LOGIC_VECTOR (9 DOWNTO 1);
 
 		-- DRam Signals
 		DRAM_ADDR						: OUT STD_LOGIC_VECTOR (12 DOWNTO 0);
@@ -64,7 +64,7 @@ ARCHITECTURE NIOS_II_SYSTEM_rtl OF NIOS_II_SYSTEM IS
 		clk_clk						: IN STD_LOGIC;
 		reset_reset_n 				: IN STD_LOGIC;
 		switches_export 			: IN STD_LOGIC_VECTOR (9 DOWNTO 0);
-		leds_export 				: OUT STD_LOGIC_VECTOR (9 DOWNTO 0);
+		leds_export 				: OUT STD_LOGIC_VECTOR (9 DOWNTO 1);
 		
 		sdram_addr        		: out   std_logic_vector(12 downto 0);                    -- addr
 		sdram_ba          		: out   std_logic_vector(1 downto 0);                     -- ba
@@ -121,7 +121,7 @@ BEGIN
 		clk_clk 					=> CLOCK_50,
 		reset_reset_n 			=> KEY(0),
 		switches_export 		=> SW(9 DOWNTO 0),
-		leds_export 			=> LEDR(9 DOWNTO 0),
+		leds_export 			=> LEDR(9 DOWNTO 1),
 		
 		sdram_addr 				=> DRAM_ADDR,
 		sdram_ba 				=> BA,
