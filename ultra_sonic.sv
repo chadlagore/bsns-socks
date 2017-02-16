@@ -24,7 +24,7 @@ module ultra_sonic(
   // Delay for 20us: 10bits = lg(1025 cycles).
   parameter TRIGGER_WIDTH = 9;
   // Delay for 60ms: 22bits = lg(2000000 cycles).
-  parameter STALL_WIDTH = 21;
+  parameter STALL_WIDTH = 22;
 
   //// INPUTS ////
   input logic clk, reset_l;
