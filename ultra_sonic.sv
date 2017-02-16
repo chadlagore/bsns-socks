@@ -31,7 +31,7 @@ module ultra_sonic(
 
   // MEMORY_MAP ////
   output logic read_data_valid;
-  output logic [31:0] read_data;
+  output logic [15:0] read_data;
 
   // GPIO IN/OUT //
   input logic echo;
@@ -52,6 +52,7 @@ module ultra_sonic(
 
   // Logic.
   logic [COUNT_WIDTH-1:0] count_out;
+  logic [15:0] count_out_shft;
   logic [TRIGGER_WIDTH-1:0] delay_trigger_count;
   logic [STALL_WIDTH-1:0] stall_count;
 
@@ -59,6 +60,8 @@ module ultra_sonic(
   assign trigger = state[0];
   assign read_data_valid = state[1];
   assign state_bits = state[5:2];
+
+  assign count_out_shft = count_out >> 6;
 
   // State logic.
   always_ff @(posedge clk or negedge reset_l)
@@ -133,8 +136,8 @@ module ultra_sonic(
   // Data out register.
   always_ff @(posedge clk or negedge reset_l)
   begin
-    if(~reset_l) read_data <= 32'b0;
-    else if(read_data_valid) read_data <= count_out;
+    if(~reset_l) read_data <= 16'b0;
+    else if(read_data_valid) read_data <= count_out_shft;
     else read_data <= read_data;
   end
 
