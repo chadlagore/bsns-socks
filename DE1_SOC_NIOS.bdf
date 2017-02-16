@@ -157,6 +157,22 @@ agreement for further details.
 	(annotation_block (location)(rect 696 968 760 984))
 )
 (pin
+	(input)
+	(rect 800 1280 968 1296)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "GPIO_0[34]" (rect 5 0 63 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
 	(output)
 	(rect 1264 96 1440 112)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
@@ -634,23 +650,6 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 1272 1248 1448 1264)
-	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "GPIO_0[35]" (rect 90 0 147 12)(font "Arial" ))
-	(pt 0 8)
-	(drawing
-		(line (pt 0 8)(pt 52 8))
-		(line (pt 52 4)(pt 78 4))
-		(line (pt 52 12)(pt 78 12))
-		(line (pt 52 12)(pt 52 4))
-		(line (pt 78 4)(pt 82 8))
-		(line (pt 82 8)(pt 78 12))
-		(line (pt 78 12)(pt 82 8))
-	)
-	(annotation_block (location)(rect 1872 1208 1936 1224))
-)
-(pin
-	(output)
 	(rect 1264 80 1440 96)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "LEDR[9..3]" (rect 90 0 145 12)(font "Arial" ))
@@ -665,6 +664,23 @@ agreement for further details.
 		(line (pt 78 12)(pt 82 8))
 	)
 	(annotation_block (location)(rect 1440 96 1496 112))
+)
+(pin
+	(output)
+	(rect 1272 1248 1448 1264)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "GPIO_0[35]" (rect 90 0 147 12)(font "Arial" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+	(annotation_block (location)(rect 1872 1208 1936 1224))
 )
 (pin
 	(bidir)
@@ -1467,9 +1483,9 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 968 1192 1192 1304)
+	(rect 968 1192 1192 1336)
 	(text "avalon_distance_module_interface" (rect 5 0 176 12)(font "Arial" ))
-	(text "inst3" (rect 8 96 31 108)(font "Arial" ))
+	(text "inst3" (rect 8 128 31 140)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -1499,6 +1515,13 @@ agreement for further details.
 		(line (pt 0 80)(pt 16 80))
 	)
 	(port
+		(pt 0 96)
+		(input)
+		(text "echo" (rect 0 0 23 12)(font "Arial" ))
+		(text "echo" (rect 21 91 44 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96))
+	)
+	(port
 		(pt 224 32)
 		(output)
 		(text "read_data[15..0]" (rect 0 0 80 12)(font "Arial" ))
@@ -1514,10 +1537,17 @@ agreement for further details.
 	)
 	(port
 		(pt 224 64)
-		(bidir)
-		(text "GPIO_0[35..34]" (rect 0 0 76 12)(font "Arial" ))
-		(text "GPIO_0[35..34]" (rect 140 59 216 71)(font "Arial" ))
-		(line (pt 224 64)(pt 208 64)(line_width 3))
+		(output)
+		(text "trigger" (rect 0 0 30 12)(font "Arial" ))
+		(text "trigger" (rect 178 59 203 71)(font "Arial" ))
+		(line (pt 224 64)(pt 208 64))
+	)
+	(port
+		(pt 224 80)
+		(output)
+		(text "flash" (rect 0 0 24 12)(font "Arial" ))
+		(text "flash" (rect 183 75 203 87)(font "Arial" ))
+		(line (pt 224 80)(pt 208 80))
 	)
 	(parameter
 		"DISTANCE"
@@ -1555,7 +1585,7 @@ agreement for further details.
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
-		(rectangle (rect 16 16 208 96))
+		(rectangle (rect 16 16 208 128))
 	)
 	(annotation_block (parameter)(rect 1504 1056 1696 1104))
 )
@@ -2187,6 +2217,11 @@ agreement for further details.
 	(bus)
 )
 (connector
+	(pt 640 88)
+	(pt 1264 88)
+	(bus)
+)
+(connector
 	(pt 696 280)
 	(pt 696 1256)
 	(bus)
@@ -2263,13 +2298,8 @@ agreement for further details.
 	(pt 744 1272)
 )
 (connector
-	(pt 640 88)
-	(pt 1264 88)
-	(bus)
-)
-(connector
-	(pt 1272 1256)
 	(pt 1192 1256)
+	(pt 1272 1256)
 	(bus)
 )
 (junction (pt 664 296))

@@ -10,19 +10,18 @@ module avalon_distance_module_interface (
     	clk, reset_l, address, io_select,
 
     	// ultrasonic distance sensor inputs
-    	// echo,
+    	echo,
 
     	// avalon interface outputs
     	read_data, data_out,
 
     	// ultrasonic distance sensor outputs
-    	// trigger, flash,
-        input logic [35:34] GPIO_0
+    	trigger, flash
     );
 
 	// status and data memory locations
     parameter DISTANCE = 16'h0900;
-	 parameter BROKEN = 16'h0904;
+	parameter BROKEN = 16'h0904;
     parameter STATUS = 16'h0908;
     parameter CAR = 16'h090C;
 
@@ -35,33 +34,25 @@ module avalon_distance_module_interface (
 	output logic [15:0] read_data;
 	output logic [15:0] data_out;
 
-    //// GPIO ////
-    inout logic [35:34] GPIO_0;
-
-    assign GPIO_0[34] = trigger;
-    assign echo = GPIO_0[35];
-
 	// ultrasonic distance sensor outputs
-	// output logic trigger;
-	// input logic echo;
-	// output logic flash;
-    logic flash;
+	output logic trigger;
+	input logic echo;
+	output logic flash;
 
 	// internal wires
-    logic echo, trigger;
 	logic status_out;
 	logic dist_mod_status;
 	logic read_data_valid;
 	logic [15:0] dist_mod_data; // downto 16 bit.
 
-    // instantiation of dist sensor fsm, puts out 16 bit data.
+    // instantiation of dist sensor fsm, puts out 16 
 	ultra_sonic us(
 		.clk(clk),
 		.reset_l(1'b1), // hard reset on boot up.
 		.read_data(dist_mod_data),
 		.read_data_valid(dist_mod_status),
-		.echo(GPIO_0[34]),
-		.trigger(GPIO_0[35])
+		.echo(echo),
+		.trigger(trigger)
 	);
 
     assign data_out = 16'b101;
