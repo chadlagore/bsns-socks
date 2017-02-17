@@ -25,7 +25,7 @@ module avalon_distance_module_interface (
 	// status and data memory locations
     parameter DISTANCE = 16'h0900;
 	parameter BROKEN = 16'h0904;
-    parameter STATUS = 16'h0908;
+    parameter CARCOUNT = 16'h0908;
     parameter CAR = 16'h090C;
 
 	//// INPUTS ////
@@ -49,17 +49,12 @@ module avalon_distance_module_interface (
 	logic [15:0] dist_mod_data; // downto 16 bit.
     logic [7:0] hex0, hex1, hex2, hex3;
 
-    output logic [6:0] HEX0, HEX1, HEX2, HEX3;
+    /// Car counter ///
+    logic [15:0] car_count;
+    logic car;
 
-    // // instantiation of dist sensor fsm, puts out 16
-	// ultra_sonic us(
-	// 	.clk(clk),
-	// 	.reset_l(1'b1), // hard reset on boot up.
-	// 	.read_data(dist_mod_data),
-	// 	.read_data_valid(dist_mod_status),
-	// 	.echo(echo),
-	// 	.trigger(trigger)
-	// );
+    output logic [6:0] HEX0, HEX1, HEX2, HEX3;
+    logic [3:0] num0, num1, num2, num3;
 
     UltraSonic us(
             .clk(clk),
@@ -70,7 +65,23 @@ module avalon_distance_module_interface (
             .hex3(HEX3)
         );
 
-    assign dist_mod_data = {HEX0, HEX1};
+    hex_decoder num1decode(HEX0, num0);
+    hex_decoder num1decode(HEX1, num1);
+    hex_decoder num1decode(HEX2, num2);
+    hex_decoder num1decode(HEX3, num3);
+
+    assign dist_mod_data = num0 + 10 * num1 + 100 * num2;
+
+    // A car counter module.
+    car_counter cc(
+            .clk(clk),
+            .reset_l(reset_l),
+            .calibrate(1'b1),
+            .distance(dist_mod_data),
+            .car_count(car_count),
+            .address(address),
+            .car(car)
+        );
 
 	// Respond to incoming request for data.
     always_comb begin
@@ -78,8 +89,8 @@ module avalon_distance_module_interface (
             case(address)
                 DISTANCE: read_data = dist_mod_data;
                 BROKEN:   read_data = {15'b0, dist_mod_status};
-			    STATUS:   read_data = {15'b0, dist_mod_status};
-                CAR:      read_data = 16'b100;
+			    CARCOUNT: read_data = car_count;
+                CAR:      read_data = car;
                 default:  read_data = 16'bz;
 			endcase
         end
