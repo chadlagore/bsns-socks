@@ -20,11 +20,11 @@ module ultra_sonic(
   );
 
   parameter STATE_BITS = 7;
-  parameter COUNT_WIDTH = 32;
+  parameter COUNT_WIDTH = 22;
   // Delay for 20us: 10bits = lg(1025 cycles).
   parameter TRIGGER_WIDTH = 9;
   // Delay for 60ms: 22bits = lg(2000000 cycles).
-  parameter STALL_WIDTH = 22;
+  parameter STALL_WIDTH = 21;
 
   //// INPUTS ////
   input logic clk, reset_l;
@@ -51,17 +51,17 @@ module ultra_sonic(
   parameter stall             = 6'b0111_00;
 
   // Logic.
-  logic [COUNT_WIDTH-1:0] count_out;
+  logic [COUNT_WIDTH-1:0] count_out = 1'b1;
   logic [15:0] count_out_shft;
-  logic [TRIGGER_WIDTH-1:0] delay_trigger_count;
-  logic [STALL_WIDTH-1:0] stall_count;
+  logic [TRIGGER_WIDTH-1:0] trigger_count = 1'b1;
+  logic [STALL_WIDTH-1:0] stall_count = 1'b1;
 
   // Outputs.
   assign trigger = state[0];
   assign read_data_valid = state[1];
   assign state_bits = state[5:2];
 
-  assign count_out_shft = count_out >> 6;
+  assign count_out_shft = count_out >> 8;
 
   // State logic.
   always_ff @(posedge clk or negedge reset_l)
@@ -72,7 +72,7 @@ module ultra_sonic(
         idle: state <= init_trigger;
         // Count trigger high for 20us.
         init_trigger:  begin
-                      if (delay_trigger_count == 1'b0) state <= wait_for_echo;
+                      if (trigger_count == 1'b0) state <= wait_for_echo;
                       else state <= init_trigger;
                      end
 
@@ -82,7 +82,6 @@ module ultra_sonic(
                           else state <= wait_for_echo;
                         end
 
-        head_to_echo: state <= on_echo;
         // Waiting for echo to go low.
         on_echo:  begin
                       if (echo == 1'b0) state <= data_ready;
@@ -105,42 +104,41 @@ module ultra_sonic(
   always_ff @(posedge clk or negedge reset_l)
   begin
     if (~reset_l)
-      delay_trigger_count <= {{(TRIGGER_WIDTH-1){1'b0}}, 1'b1};
-    else if (state == stall) // reset trigger counter on stall.
-      delay_trigger_count <= {{(TRIGGER_WIDTH-1){1'b0}}, 1'b1};
-    else if (state == init_trigger) // increment trigger counter on trigger.
-      delay_trigger_count <= delay_trigger_count + 1'b1;
-    else
-      delay_trigger_count <= delay_trigger_count;
+      trigger_count <= 1;
+    else begin
+        case(state)
+            stall:          trigger_count <= 1;
+            init_trigger:   trigger_count <= trigger_count + 1'b1;
+            default:        trigger_count <= trigger_count;
+        endcase
+    end
   end
-  
+
   // Echo counter!
   always_ff @(posedge clk or negedge reset_l)
   begin
-    if (~reset_l) count_out <= {COUNT_WIDTH{1'b0}};
-    else if (state == init_trigger) count_out <= {{(COUNT_WIDTH-1){1'b0}}, 1'b1};
-    else if (echo) count_out <= count_out + {{(COUNT_WIDTH-1){1'b0}}, 1'b1};
-    else count_out <= count_out;
+    if (~reset_l) count_out <= 1;
+    else if (state == init_trigger) count_out <= 1;
+    else if (echo) count_out <= count_out + 1;
   end
 
   // Stall counter.
   always_ff @(posedge clk or negedge reset_l)
   begin
-    if (~reset_l) stall_count <= {STALL_WIDTH{1'b0}};
-    else if (state == init_trigger) stall_count <= {{(STALL_WIDTH-1){1'b0}}, 1'b1};
+    if (~reset_l) stall_count <= 1;
+    else if (state == init_trigger) stall_count <= 1;
     else if (state == stall)
-      stall_count <= stall_count + {{(STALL_WIDTH-1){1'b0}}, 1'b1};
-    else stall_count <= stall_count;
+      stall_count <= stall_count + 1;
   end
 
-  // Data out register.
-  //always_ff @(posedge clk or negedge reset_l)
-  //begin
-    //if(~reset_l) read_data <= 16'b0;
-    //else if(read_data_valid) read_data <= count_out_shft;
-    //else read_data <= count_out >> 6;
-  //end
-  
-  assign read_data = count_out_shft;
-  
+  // Read data register.
+  always @(posedge clk or negedge reset_l)
+  begin
+    if (~reset_l) read_data <= 1;
+    else if (state == stall) read_data = count_out_shft;
+  end
+
+  // assign read_data = count_out_shft;
+
+
 endmodule

@@ -5,7 +5,7 @@ module ultra_sonic_tb();
 
   // Outputs to nios
   logic [31:0] read;
-  logic echo, trigger, read_data_valid;
+  logic echo, trigger, read_data_valid, ioselect;
   logic [15:0] address;
   //logic [9:0] leds;
 
@@ -13,7 +13,7 @@ module ultra_sonic_tb();
       // inputs
       .clk(clk),
       .reset_l(~reset),
-      .io_select(),
+      .io_select(ioselect),
       .address(address),
 
       // outputs
@@ -32,35 +32,36 @@ module ultra_sonic_tb();
     reset = 0;
     #1 clk = 0;
     #1 clk = 1;
+    echo = 0;
 
-    for(int j=0; j < 1; j++) begin
-      // Trigger high, low and wait.
-      for (int i = 0; i < 1500; i++) begin
+    for (int j = 0; j < 5; j++) begin
+        for (int i = 0; i < 1500; i++) begin
+            #1 clk = ~clk;
+        end
+
+        echo = 1;
+
+        // Echo high
+        for (int i = 0; i < j*500000; i++) begin
         #1 clk = ~clk;
-      end
+        end
 
-      echo = 1;
+        echo = 0;
 
-      // Echo high
-      for (int i = 0; i < j * 5000; i++) begin
+        // Wait out stall.
+        for (int i = 0; i < 2*(2**21); i++) begin
         #1 clk = ~clk;
-      end
+        end
 
-      echo = 0;
+        ioselect = 1;
+        address = 16'h0900;
 
-      // Wait out stall.
-      for (int i = 0; i < 2*(2**16); i++) begin
+        // Trigger high, low and wait.
+        for (int i = 0; i < 50; i++) begin
         #1 clk = ~clk;
-      end
+        end
 
-      address = 16'h0904;
-
-      // Trigger high, low and wait.
-      for (int i = 0; i < 50; i++) begin
-        #1 clk = ~clk;
-      end
-
-      address = 16'h0900;
+        ioselect = 0;
     end
   end
 endmodule

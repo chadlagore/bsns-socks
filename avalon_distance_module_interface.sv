@@ -45,17 +45,17 @@ module avalon_distance_module_interface (
 	logic read_data_valid;
 	logic [15:0] dist_mod_data; // downto 16 bit.
 
-    // instantiation of dist sensor fsm, puts out 16 
+    // instantiation of dist sensor fsm, puts out 16
 	ultra_sonic us(
 		.clk(clk),
-		.reset_l(1'b1), // hard reset on boot up.
+		.reset_l(reset_l), // hard reset on boot up.
 		.read_data(dist_mod_data),
 		.read_data_valid(dist_mod_status),
 		.echo(echo),
 		.trigger(trigger)
 	);
 
-    assign data_out = 16'b101;
+    assign data_out = dist_mod_data;
 
 	// Respond to incoming request for data.
     always_comb begin
@@ -63,7 +63,7 @@ module avalon_distance_module_interface (
             case(address)
                 DISTANCE: read_data = dist_mod_data;
                 BROKEN:   read_data = {15'b0, dist_mod_status};
-					 STATUS:   read_data = {15'b0, dist_mod_status};
+				STATUS:   read_data = {15'b0, dist_mod_status};
                 CAR:      read_data = 16'b100;
                 default:  read_data = 16'bz;
 			endcase
