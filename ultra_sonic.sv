@@ -1,9 +1,7 @@
-/// IMPORTANT ////
-/// Formula to get the length of the echo from count data:
-  /// t_pulse = 2 * count.
-
 `default_nettype none
-module ultra_sonic(
+
+module ultra_sonic
+(
     // INPUTS //
     clk, // 50MHz
     reset_l,
@@ -17,21 +15,21 @@ module ultra_sonic(
 
     // OUPUT TO GPIO //
     trigger
-  );
+);
 
   parameter STATE_BITS = 7;
   parameter COUNT_WIDTH = 32;
   // Delay for 20us: 10bits = lg(1025 cycles).
   parameter TRIGGER_WIDTH = 9;
   // Delay for 60ms: 22bits = lg(2000000 cycles).
-  parameter STALL_WIDTH = 21;
+  parameter STALL_WIDTH = 22;
 
   //// INPUTS ////
   input logic clk, reset_l;
 
   // MEMORY_MAP ////
   output logic read_data_valid;
-  output logic [31:0] read_data;
+  output logic [15:0] read_data;
 
   // GPIO IN/OUT //
   input logic echo;
@@ -41,7 +39,7 @@ module ultra_sonic(
 
   // State
   logic [STATE_BITS-1:0] state;
-                                // 5432_10
+  // 5432_10
   parameter idle              = 6'b0000_00;
   parameter init_trigger      = 6'b0001_01;
   parameter wait_for_echo     = 6'b0011_00;
@@ -52,6 +50,7 @@ module ultra_sonic(
 
   // Logic.
   logic [COUNT_WIDTH-1:0] count_out;
+  logic [15:0] count_out_shft;
   logic [TRIGGER_WIDTH-1:0] delay_trigger_count;
   logic [STALL_WIDTH-1:0] stall_count;
 
@@ -117,7 +116,6 @@ module ultra_sonic(
     if (~reset_l) count_out <= {COUNT_WIDTH{1'b0}};
     else if (state == init_trigger) count_out <= {{(COUNT_WIDTH-1){1'b0}}, 1'b1};
     else if (echo) count_out <= count_out + {{(COUNT_WIDTH-1){1'b0}}, 1'b1};
-    else count_out <= count_out;
   end
 
   // Stall counter.
@@ -125,17 +123,12 @@ module ultra_sonic(
   begin
     if (~reset_l) stall_count <= {STALL_WIDTH{1'b0}};
     else if (state == init_trigger) stall_count <= {{(STALL_WIDTH-1){1'b0}}, 1'b1};
-    else if (state == stall)
-      stall_count <= stall_count + {{(STALL_WIDTH-1){1'b0}}, 1'b1};
-    else stall_count <= stall_count;
+    else if (state == stall) stall_count <= stall_count + {{(STALL_WIDTH-1){1'b0}}, 1'b1};
   end
 
-  // Data out register.
+  // whenever read data valid is high, save the distance
   always_ff @(posedge clk or negedge reset_l)
-  begin
-    if(~reset_l) read_data <= 32'b0;
-    else if(read_data_valid) read_data <= count_out;
-    else read_data <= read_data;
-  end
+    if (~reset_l) read_data <= 16'b0;
+    else if (read_data_valid) read_data <= count_out[31:16];
 
 endmodule

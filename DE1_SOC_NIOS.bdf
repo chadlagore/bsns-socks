@@ -533,7 +533,7 @@ agreement for further details.
 )
 (pin
 	(bidir)
-	(rect 1568 1080 1744 1096)
+	(rect 1472 1208 1648 1224)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
 	(text "GPIO_0[35..0]" (rect 90 0 160 12)(font "Arial" ))
 	(pt 0 8)
@@ -547,11 +547,11 @@ agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1744 1096 1808 1112))
+	(annotation_block (location)(rect 1648 1224 1712 1240))
 )
 (pin
 	(bidir)
-	(rect 1568 1096 1744 1112)
+	(rect 1472 1224 1648 1240)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
 	(text "GPIO_1[35..0]" (rect 90 0 160 12)(font "Arial" ))
 	(pt 0 8)
@@ -565,7 +565,7 @@ agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1744 1112 1808 1128))
+	(annotation_block (location)(rect 1648 1240 1712 1256))
 )
 (symbol
 	(rect 1048 568 1248 728)
@@ -1356,6 +1356,98 @@ agreement for further details.
 		(rectangle (rect 16 16 256 448))
 	)
 )
+(symbol
+	(rect 968 1120 1192 1264)
+	(text "avalon_distance_module_interface" (rect 5 0 176 12)(font "Arial" ))
+	(text "inst3" (rect 8 128 31 140)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "reset_l" (rect 0 0 33 12)(font "Arial" ))
+		(text "reset_l" (rect 21 43 54 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "address[15..0]" (rect 0 0 70 12)(font "Arial" ))
+		(text "address[15..0]" (rect 21 59 91 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "io_select" (rect 0 0 43 12)(font "Arial" ))
+		(text "io_select" (rect 21 75 64 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "echo" (rect 0 0 23 12)(font "Arial" ))
+		(text "echo" (rect 21 91 44 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96))
+	)
+	(port
+		(pt 224 32)
+		(output)
+		(text "read_data[15..0]" (rect 0 0 80 12)(font "Arial" ))
+		(text "read_data[15..0]" (rect 136 27 216 39)(font "Arial" ))
+		(line (pt 224 32)(pt 208 32)(line_width 3))
+	)
+	(port
+		(pt 224 48)
+		(output)
+		(text "data_out[15..0]" (rect 0 0 74 12)(font "Arial" ))
+		(text "data_out[15..0]" (rect 141 43 215 55)(font "Arial" ))
+		(line (pt 224 48)(pt 208 48)(line_width 3))
+	)
+	(port
+		(pt 224 64)
+		(output)
+		(text "trigger" (rect 0 0 30 12)(font "Arial" ))
+		(text "trigger" (rect 178 59 208 71)(font "Arial" ))
+		(line (pt 224 64)(pt 208 64))
+	)
+	(port
+		(pt 224 80)
+		(output)
+		(text "flash" (rect 0 0 24 12)(font "Arial" ))
+		(text "flash" (rect 183 75 207 87)(font "Arial" ))
+		(line (pt 224 80)(pt 208 80))
+	)
+	(parameter
+		"DISTANCE"
+		"0000100100000000"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"BROKEN"
+		"0000100100000100"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"STATUS"
+		"0000100100001000"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"CAR"
+		"0000100100001100"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(drawing
+		(rectangle (rect 16 16 208 128))
+	)
+	(annotation_block (parameter)(rect 1728 1064 1984 1136))
+)
 (connector
 	(pt 840 296)
 	(pt 1000 296)
@@ -1419,10 +1511,6 @@ agreement for further details.
 (connector
 	(pt 344 24)
 	(pt 528 24)
-)
-(connector
-	(pt 344 24)
-	(pt 344 88)
 )
 (connector
 	(pt 776 280)
@@ -1546,11 +1634,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 1472 1104)
-	(pt 1568 1104)
-	(bus)
-)
-(connector
 	(pt 1544 736)
 	(pt 320 736)
 )
@@ -1576,11 +1659,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 152 168)
-	(pt 288 168)
-	(bus)
-)
-(connector
 	(pt 304 168)
 	(pt 304 752)
 	(bus)
@@ -1589,11 +1667,6 @@ agreement for further details.
 	(text "IO_read_data[7..0]" (rect 314 736 406 748)(font "Arial" ))
 	(pt 1528 752)
 	(pt 304 752)
-	(bus)
-)
-(connector
-	(pt 1568 1088)
-	(pt 1472 1088)
 	(bus)
 )
 (connector
@@ -1676,11 +1749,6 @@ agreement for further details.
 (connector
 	(pt 1264 184)
 	(pt 640 184)
-)
-(connector
-	(pt 80 184)
-	(pt 368 184)
-	(bus)
 )
 (connector
 	(pt 1264 200)
@@ -1949,17 +2017,8 @@ agreement for further details.
 	(pt 944 328)
 )
 (connector
-	(pt 664 296)
-	(pt 744 296)
-)
-(connector
 	(pt 744 296)
 	(pt 840 296)
-)
-(connector
-	(pt 640 280)
-	(pt 760 280)
-	(bus)
 )
 (connector
 	(pt 760 280)
@@ -1994,6 +2053,149 @@ agreement for further details.
 	(pt 224 104)
 	(pt 224 880)
 )
+(connector
+	(pt 1376 1232)
+	(pt 1472 1232)
+	(bus)
+)
+(connector
+	(pt 968 1184)
+	(pt 688 1184)
+	(bus)
+)
+(connector
+	(pt 688 1184)
+	(pt 688 280)
+	(bus)
+)
+(connector
+	(pt 640 280)
+	(pt 688 280)
+	(bus)
+)
+(connector
+	(pt 688 280)
+	(pt 760 280)
+	(bus)
+)
+(connector
+	(pt 1192 1152)
+	(pt 1312 1152)
+	(bus)
+)
+(connector
+	(pt 1312 1096)
+	(pt 1312 1152)
+	(bus)
+)
+(connector
+	(pt 1312 1096)
+	(pt 168 1096)
+	(bus)
+)
+(connector
+	(pt 168 1096)
+	(pt 168 168)
+	(bus)
+)
+(connector
+	(pt 152 168)
+	(pt 168 168)
+	(bus)
+)
+(connector
+	(pt 168 168)
+	(pt 288 168)
+	(bus)
+)
+(connector
+	(pt 968 1152)
+	(pt 344 1152)
+)
+(connector
+	(pt 344 24)
+	(pt 344 88)
+)
+(connector
+	(pt 344 88)
+	(pt 344 1152)
+)
+(connector
+	(pt 968 1200)
+	(pt 672 1200)
+)
+(connector
+	(pt 672 1200)
+	(pt 672 296)
+)
+(connector
+	(pt 664 296)
+	(pt 672 296)
+)
+(connector
+	(pt 672 296)
+	(pt 744 296)
+)
+(connector
+	(pt 1400 1216)
+	(pt 1376 1216)
+	(bus)
+)
+(connector
+	(pt 920 1216)
+	(pt 968 1216)
+)
+(connector
+	(pt 920 1216)
+	(pt 920 1352)
+)
+(connector
+	(text "GPIO_0[32]" (rect 930 1336 987 1348)(font "Arial" ))
+	(pt 920 1352)
+	(pt 1400 1352)
+)
+(connector
+	(pt 1400 1216)
+	(pt 1400 1352)
+)
+(connector
+	(pt 1472 1216)
+	(pt 1432 1216)
+	(bus)
+)
+(connector
+	(pt 1432 1216)
+	(pt 1400 1216)
+	(bus)
+)
+(connector
+	(text "GPIO_0[33]" (rect 1202 1168 1259 1180)(font "Arial" ))
+	(pt 1192 1184)
+	(pt 1432 1184)
+)
+(connector
+	(pt 1432 1184)
+	(pt 1432 1216)
+)
+(connector
+	(pt 184 184)
+	(pt 184 1168)
+)
+(connector
+	(pt 80 184)
+	(pt 184 184)
+	(bus)
+)
+(connector
+	(pt 184 184)
+	(pt 368 184)
+	(bus)
+)
+(connector
+	(text "KEY[0]" (rect 194 1152 229 1164)(font "Arial" ))
+	(pt 968 1168)
+	(pt 184 1168)
+)
 (junction (pt 664 296))
 (junction (pt 208 88))
 (junction (pt 224 104))
@@ -2013,7 +2215,13 @@ agreement for further details.
 (junction (pt 776 344))
 (junction (pt 272 88))
 (junction (pt 304 168))
-(text "IO BaseAddress 0x8400_0200 - 0x8400_02FF" (rect 1024 1056 1289 1070)(font "Arial" (font_size 8)))
+(junction (pt 688 280))
+(junction (pt 168 168))
+(junction (pt 184 184))
+(junction (pt 672 296))
+(junction (pt 1400 1216))
+(junction (pt 1432 1216))
+(text "IO BaseAddress 0x8400_0200 - 0x8400_02FF" (rect 1464 1032 1729 1046)(font "Arial" (font_size 8)))
 (text "Acknowledge of 1 clock delay" (rect 560 -144 732 -130)(font "Arial" (font_size 8)))
 (text "introduces a Wait State for slow" (rect 560 -128 744 -114)(font "Arial" (font_size 8)))
 (text "Bridge Peripherals" (rect 560 -112 663 -98)(font "Arial" (font_size 8)))
@@ -2117,7 +2325,7 @@ agreement for further details.
 (text "CHECK IN THE DE1-SoC MANUAL TO SEE WHAT PINS ARE ASSIGNED TO CHIPS AND IO PORTS ON THE BOARD. " (rect 2112 -40 2945 -24)(font "Arial" (color 0 0 255)(font_size 10)))
 (text "GPS_TXD" (rect 2560 312 2615 326)(font "Arial" (font_size 8)))
 (text "GPS_RXD" (rect 2560 328 2616 342)(font "Arial" (font_size 8)))
-(text "For these pin-outs - see the GPIO_0 and GPIO1 connectors top right in this file" (rect 888 1088 1487 1105)(font "Arial" (color 255 0 0)(font_size 11)))
+(text "For these pin-outs - see the GPIO_0 and GPIO1 connectors top right in this file" (rect 1336 936 1935 953)(font "Arial" (color 255 0 0)(font_size 11)))
 (text "BlueTooth_RXD" (rect 2536 360 2624 374)(font "Arial" (font_size 8)))
 (text "BlueTooth_TXD" (rect 2536 376 2623 390)(font "Arial" (font_size 8)))
 (text "TouchScreen_RXD" (rect 2320 152 2428 166)(font "Arial" (font_size 8)))

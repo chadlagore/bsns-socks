@@ -381,7 +381,7 @@ set_location_assignment PIN_D11 -to VGA_VS
 
 
 set_global_assignment -name EDA_SIMULATION_TOOL "<None>"
-set_global_assignment -name LAST_QUARTUS_VERSION "15.0.0 SP0.01WE"
+set_global_assignment -name LAST_QUARTUS_VERSION 15.0.0
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
@@ -964,6 +964,8 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING ON
 set_global_assignment -name FITTER_EFFORT "AUTO FIT"
+set_global_assignment -name SYSTEMVERILOG_FILE avalon_distance_module_interface.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ultra_sonic.sv
 set_global_assignment -name QSYS_FILE nios_system.qsys
 set_global_assignment -name VHDL_FILE ACIA_6850.vhd
 set_global_assignment -name VHDL_FILE ACIA_RX.vhd
