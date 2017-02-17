@@ -1,9 +1,7 @@
-/// IMPORTANT ////
-/// Formula to get the length of the echo from count data:
-  /// t_pulse = 2 * count.
-
 `default_nettype none
-module ultra_sonic(
+
+module ultra_sonic
+(
     // INPUTS //
     clk, // 50MHz
     reset_l,
@@ -17,7 +15,7 @@ module ultra_sonic(
 
     // OUPUT TO GPIO //
     trigger
-  );
+);
 
   parameter STATE_BITS = 7;
   parameter COUNT_WIDTH = 32;
@@ -41,7 +39,7 @@ module ultra_sonic(
 
   // State
   logic [STATE_BITS-1:0] state;
-                                // 5432_10
+  // 5432_10
   parameter idle              = 6'b0000_00;
   parameter init_trigger      = 6'b0001_01;
   parameter wait_for_echo     = 6'b0011_00;
@@ -60,8 +58,6 @@ module ultra_sonic(
   assign trigger = state[0];
   assign read_data_valid = state[1];
   assign state_bits = state[5:2];
-
-  assign count_out_shft = count_out >> 6;
 
   // State logic.
   always_ff @(posedge clk or negedge reset_l)
@@ -113,14 +109,13 @@ module ultra_sonic(
     else
       delay_trigger_count <= delay_trigger_count;
   end
-  
+
   // Echo counter!
   always_ff @(posedge clk or negedge reset_l)
   begin
     if (~reset_l) count_out <= {COUNT_WIDTH{1'b0}};
     else if (state == init_trigger) count_out <= {{(COUNT_WIDTH-1){1'b0}}, 1'b1};
     else if (echo) count_out <= count_out + {{(COUNT_WIDTH-1){1'b0}}, 1'b1};
-    else count_out <= count_out;
   end
 
   // Stall counter.
@@ -128,19 +123,12 @@ module ultra_sonic(
   begin
     if (~reset_l) stall_count <= {STALL_WIDTH{1'b0}};
     else if (state == init_trigger) stall_count <= {{(STALL_WIDTH-1){1'b0}}, 1'b1};
-    else if (state == stall)
-      stall_count <= stall_count + {{(STALL_WIDTH-1){1'b0}}, 1'b1};
-    else stall_count <= stall_count;
+    else if (state == stall) stall_count <= stall_count + {{(STALL_WIDTH-1){1'b0}}, 1'b1};
   end
 
-  // Data out register.
-  //always_ff @(posedge clk or negedge reset_l)
-  //begin
-    //if(~reset_l) read_data <= 16'b0;
-    //else if(read_data_valid) read_data <= count_out_shft;
-    //else read_data <= count_out >> 6;
-  //end
-  
-  assign read_data = count_out_shft;
-  
+  // whenever read data valid is high, save the distance
+  always_ff @(posedge clk or negedge reset_l)
+    if (~reset_l) read_data <= 16'b0;
+    else if (read_data_valid) read_data <= count_out[31:16];
+
 endmodule

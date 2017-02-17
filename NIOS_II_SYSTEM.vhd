@@ -53,7 +53,7 @@ ENTITY NIOS_II_SYSTEM IS
 		-- Hex Display
 		Hex0_1			: out   std_logic_vector(7 downto 0) ;
 		Hex2_3			: out   std_logic_vector(7 downto 0) ;
-		Hex4_5			: out   std_logic_vector(7 downto 0) 
+		Hex4_5			: out   std_logic_vector(7 downto 0)
 	);
 END NIOS_II_SYSTEM;
 
@@ -94,8 +94,6 @@ ARCHITECTURE NIOS_II_SYSTEM_rtl OF NIOS_II_SYSTEM IS
       lcd_data_EN         : out   std_logic;                                        -- E
 		lcd_data_ON         : out   std_logic;                                        -- ON
       lcd_data_BLON       : out   std_logic;   		 										   -- Backlight ON
-
-
 
 		-- Push button signals
 		push_buttons_export 	  : in    std_logic_vector(2 downto 0)  := (others => 'X'); -- export
@@ -142,6 +140,8 @@ BEGIN
 		io_rw 					=> IO_rw,
 		io_write_data 			=> IO_write_data,
 		io_read_data 			=> IO_read_data,
+		
+
 		
 		lcd_data_RS => lcd_RS,
       lcd_data_RW => lcd_RW,
