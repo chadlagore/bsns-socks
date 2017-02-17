@@ -134,11 +134,13 @@ module ultra_sonic(
   end
 
   // Data out register.
-  always_ff @(posedge clk or negedge reset_l)
-  begin
-    if(~reset_l) read_data <= 16'b0;
-    else if(read_data_valid) read_data <= count_out_shft;
-    else read_data <= read_data;
-  end
-
+  //always_ff @(posedge clk or negedge reset_l)
+  //begin
+    //if(~reset_l) read_data <= 16'b0;
+    //else if(read_data_valid) read_data <= count_out_shft;
+    //else read_data <= count_out >> 6;
+  //end
+  
+  assign read_data = count_out_shft;
+  
 endmodule

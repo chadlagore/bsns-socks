@@ -391,38 +391,6 @@ set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING ON
 set_global_assignment -name FITTER_EFFORT "AUTO FIT"
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT NONE -section_id eda_simulation
-set_global_assignment -name SYSTEMVERILOG_FILE ultra_top.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ultra_sonic_mm_tb.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ultra_sonic.sv
-set_global_assignment -name SYSTEMVERILOG_FILE avalon_distance_module_interface.sv
-set_global_assignment -name QIP_FILE nios_system.qip
-set_global_assignment -name QSYS_FILE nios_system.qsys
-set_global_assignment -name VHDL_FILE ACIA_6850.vhd
-set_global_assignment -name VHDL_FILE ACIA_RX.vhd
-set_global_assignment -name VHDL_FILE ACIA_TX.vhd
-set_global_assignment -name VHDL_FILE Register3Bit.vhd
-set_global_assignment -name VHDL_FILE ACIA_Clock.vhd
-set_global_assignment -name BDF_FILE DE1_SOC_NIOS.bdf
-set_global_assignment -name VHDL_FILE HexTo7SegmentDisplay.vhd
-set_global_assignment -name BDF_FILE HexDisplays.bdf
-set_global_assignment -name SDC_FILE DE1_SoC.sdc
-set_global_assignment -name VHDL_FILE Latch3Bit.vhd
-set_global_assignment -name VHDL_FILE VGADataMux.vhd
-set_global_assignment -name VHDL_FILE GraphicsController.vhd
-set_global_assignment -name VHDL_FILE RamAddressMapper.vhd
-set_global_assignment -name VHDL_FILE LCD_Controller.vhd
-set_global_assignment -name BDF_FILE Graphics_and_Video_Controller.bdf
-set_global_assignment -name QIP_FILE ColourPallette_2PortRam.qip
-set_global_assignment -name QIP_FILE VideoRamFrameBuffer.qip
-set_global_assignment -name BDF_FILE GraphicsFrameBufferMemory.bdf
-set_global_assignment -name VHDL_FILE Two_Line_LCD_Controller.vhd
-set_global_assignment -name QIP_FILE PLL30Mhz.qip
-set_global_assignment -name SIP_FILE PLL30Mhz.sip
-set_global_assignment -name VHDL_FILE NIOS_II_SYSTEM.vhd
-set_global_assignment -name SOURCE_FILE DE1_SOC_NIOS.qsf
-set_global_assignment -name BDF_FILE ACIA_BaudRate_Generator.bdf
-set_global_assignment -name BDF_FILE OnChipM68xxIO.bdf
-set_global_assignment -name VHDL_FILE M68xxIODecoder.vhd
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
@@ -997,4 +965,36 @@ set_instance_assignment -name PACKAGE_SKEW_COMPENSATION OFF -to HPS_DDR3_WE_N
 set_instance_assignment -name PACKAGE_SKEW_COMPENSATION OFF -to HPS_DDR3_RESET_N
 set_instance_assignment -name PACKAGE_SKEW_COMPENSATION OFF -to HPS_DDR3_CK_P
 set_instance_assignment -name PACKAGE_SKEW_COMPENSATION OFF -to HPS_DDR3_CK_N
+set_global_assignment -name BDF_FILE DE1_SOC_NIOS.bdf
+set_global_assignment -name SYSTEMVERILOG_FILE ultra_top.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ultra_sonic_mm_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ultra_sonic.sv
+set_global_assignment -name SYSTEMVERILOG_FILE avalon_distance_module_interface.sv
+set_global_assignment -name QIP_FILE nios_system.qip
+set_global_assignment -name QSYS_FILE nios_system.qsys
+set_global_assignment -name VHDL_FILE ACIA_6850.vhd
+set_global_assignment -name VHDL_FILE ACIA_RX.vhd
+set_global_assignment -name VHDL_FILE ACIA_TX.vhd
+set_global_assignment -name VHDL_FILE Register3Bit.vhd
+set_global_assignment -name VHDL_FILE ACIA_Clock.vhd
+set_global_assignment -name VHDL_FILE HexTo7SegmentDisplay.vhd
+set_global_assignment -name BDF_FILE HexDisplays.bdf
+set_global_assignment -name SDC_FILE DE1_SoC.sdc
+set_global_assignment -name VHDL_FILE Latch3Bit.vhd
+set_global_assignment -name VHDL_FILE VGADataMux.vhd
+set_global_assignment -name VHDL_FILE GraphicsController.vhd
+set_global_assignment -name VHDL_FILE RamAddressMapper.vhd
+set_global_assignment -name VHDL_FILE LCD_Controller.vhd
+set_global_assignment -name BDF_FILE Graphics_and_Video_Controller.bdf
+set_global_assignment -name QIP_FILE ColourPallette_2PortRam.qip
+set_global_assignment -name QIP_FILE VideoRamFrameBuffer.qip
+set_global_assignment -name BDF_FILE GraphicsFrameBufferMemory.bdf
+set_global_assignment -name VHDL_FILE Two_Line_LCD_Controller.vhd
+set_global_assignment -name QIP_FILE PLL30Mhz.qip
+set_global_assignment -name SIP_FILE PLL30Mhz.sip
+set_global_assignment -name VHDL_FILE NIOS_II_SYSTEM.vhd
+set_global_assignment -name SOURCE_FILE DE1_SOC_NIOS.qsf
+set_global_assignment -name BDF_FILE ACIA_BaudRate_Generator.bdf
+set_global_assignment -name BDF_FILE OnChipM68xxIO.bdf
+set_global_assignment -name VHDL_FILE M68xxIODecoder.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

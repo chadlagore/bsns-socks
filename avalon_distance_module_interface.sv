@@ -62,8 +62,8 @@ module avalon_distance_module_interface (
         if(io_select) begin
             case(address)
                 DISTANCE: read_data = dist_mod_data;
-                BROKEN:   read_data = 16'b011;
-    			STATUS:   read_data = {15'b0, dist_mod_status};
+                BROKEN:   read_data = {15'b0, dist_mod_status};
+					 STATUS:   read_data = {15'b0, dist_mod_status};
                 CAR:      read_data = 16'b100;
                 default:  read_data = 16'bz;
 			endcase

@@ -160,7 +160,7 @@ agreement for further details.
 	(input)
 	(rect 800 1280 968 1296)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "GPIO_0[34]" (rect 5 0 63 12)(font "Arial" ))
+	(text "GPIO_0[34]" (rect 5 0 62 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -171,6 +171,7 @@ agreement for further details.
 		(line (pt 109 12)(pt 113 8))
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 736 1296 800 1312))
 )
 (pin
 	(output)
@@ -1525,28 +1526,28 @@ agreement for further details.
 		(pt 224 32)
 		(output)
 		(text "read_data[15..0]" (rect 0 0 80 12)(font "Arial" ))
-		(text "read_data[15..0]" (rect 136 27 203 39)(font "Arial" ))
+		(text "read_data[15..0]" (rect 136 27 216 39)(font "Arial" ))
 		(line (pt 224 32)(pt 208 32)(line_width 3))
 	)
 	(port
 		(pt 224 48)
 		(output)
 		(text "data_out[15..0]" (rect 0 0 74 12)(font "Arial" ))
-		(text "data_out[15..0]" (rect 141 43 203 55)(font "Arial" ))
+		(text "data_out[15..0]" (rect 141 43 215 55)(font "Arial" ))
 		(line (pt 224 48)(pt 208 48)(line_width 3))
 	)
 	(port
 		(pt 224 64)
 		(output)
 		(text "trigger" (rect 0 0 30 12)(font "Arial" ))
-		(text "trigger" (rect 178 59 203 71)(font "Arial" ))
+		(text "trigger" (rect 178 59 208 71)(font "Arial" ))
 		(line (pt 224 64)(pt 208 64))
 	)
 	(port
 		(pt 224 80)
 		(output)
 		(text "flash" (rect 0 0 24 12)(font "Arial" ))
-		(text "flash" (rect 183 75 203 87)(font "Arial" ))
+		(text "flash" (rect 183 75 207 87)(font "Arial" ))
 		(line (pt 224 80)(pt 208 80))
 	)
 	(parameter
@@ -1998,154 +1999,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 1320 816)
-	(pt 1272 816)
-)
-(connector
-	(pt 1320 832)
-	(pt 1272 832)
-)
-(connector
-	(pt 1320 848)
-	(pt 1272 848)
-)
-(connector
-	(pt 1320 864)
-	(pt 1272 864)
-)
-(connector
-	(text "key[0]" (rect 234 864 265 876)(font "Arial" ))
-	(pt 224 880)
-	(pt 968 880)
-)
-(connector
-	(pt 712 896)
-	(pt 968 896)
-)
-(connector
-	(pt 712 328)
-	(pt 712 896)
-)
-(connector
-	(pt 760 832)
-	(pt 968 832)
-	(bus)
-)
-(connector
-	(pt 760 280)
-	(pt 760 832)
-	(bus)
-)
-(connector
-	(pt 272 800)
-	(pt 968 800)
-)
-(connector
-	(pt 272 88)
-	(pt 272 800)
-)
-(connector
-	(pt 776 816)
-	(pt 968 816)
-	(bus)
-)
-(connector
-	(text "IO_write_data[7..0]" (rect 760 727 772 820)(font "Arial" )(vertical))
-	(pt 776 344)
-	(pt 776 816)
-	(bus)
-)
-(connector
-	(pt 728 864)
-	(pt 968 864)
-)
-(connector
-	(pt 728 664)
-	(pt 728 864)
-)
-(connector
-	(pt 744 848)
-	(pt 968 848)
-)
-(connector
-	(pt 1544 880)
-	(pt 1272 880)
-)
-(connector
-	(pt 1544 736)
-	(pt 1544 880)
-)
-(connector
-	(pt 1528 896)
-	(pt 1272 896)
-	(bus)
-)
-(connector
-	(pt 928 928)
-	(pt 968 928)
-)
-(connector
-	(pt 928 944)
-	(pt 968 944)
-)
-(connector
-	(pt 928 960)
-	(pt 968 960)
-)
-(connector
-	(pt 928 976)
-	(pt 968 976)
-)
-(connector
-	(pt 640 328)
-	(pt 712 328)
-)
-(connector
-	(pt 712 328)
-	(pt 944 328)
-)
-(connector
-	(pt 760 280)
-	(pt 776 280)
-	(bus)
-)
-(connector
-	(pt 208 88)
-	(pt 272 88)
-)
-(connector
-	(pt 272 88)
-	(pt 344 88)
-)
-(connector
-	(text "IO_write_data[15..0]" (rect 650 328 749 340)(font "Arial" )(invisible))
-	(pt 640 344)
-	(pt 776 344)
-	(bus)
-)
-(connector
-	(pt 776 344)
-	(pt 792 344)
-	(bus)
-)
-(connector
-	(text "IO_read_data[15..0]" (rect 260 -197 272 -100)(font "Arial" )(vertical))
-	(pt 288 -248)
-	(pt 288 168)
-	(bus)
-)
-(connector
-	(pt 288 168)
-	(pt 288 1080)
-	(bus)
-)
-(connector
-	(text "IO_read_data[15..0]" (rect 298 1064 395 1076)(font "Arial" ))
-	(pt 288 1080)
-	(pt 1416 1080)
-	(bus)
-)
-(connector
 	(pt 304 168)
 	(pt 304 752)
 	(bus)
@@ -2154,11 +2007,6 @@ agreement for further details.
 	(text "IO_read_data[7..0]" (rect 314 736 406 748)(font "Arial" ))
 	(pt 1528 752)
 	(pt 304 752)
-	(bus)
-)
-(connector
-	(pt 1528 896)
-	(pt 1528 752)
 	(bus)
 )
 (connector
@@ -2232,17 +2080,8 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 744 1272)
-	(pt 968 1272)
-)
-(connector
 	(pt 1416 1224)
 	(pt 1192 1224)
-	(bus)
-)
-(connector
-	(pt 1416 1080)
-	(pt 1416 1224)
 	(bus)
 )
 (connector
@@ -2269,17 +2108,143 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 696 280)
-	(pt 760 280)
-	(bus)
-)
-(connector
 	(pt 344 24)
 	(pt 344 88)
 )
 (connector
 	(pt 344 88)
 	(pt 344 1224)
+)
+(connector
+	(pt 1192 1256)
+	(pt 1272 1256)
+	(bus)
+)
+(connector
+	(text "IO_read_data[15..0]" (rect 298 1064 395 1076)(font "Arial" ))
+	(pt 288 1080)
+	(pt 1416 1080)
+	(bus)
+)
+(connector
+	(pt 1416 1224)
+	(pt 1416 1080)
+	(bus)
+)
+(connector
+	(text "IO_read_data[15..0]" (rect 260 -197 272 -100)(font "Arial" )(vertical))
+	(pt 288 -248)
+	(pt 288 168)
+	(bus)
+)
+(connector
+	(pt 288 168)
+	(pt 288 1080)
+	(bus)
+)
+(connector
+	(pt 968 1272)
+	(pt 744 1272)
+)
+(connector
+	(pt 1320 832)
+	(pt 1272 832)
+)
+(connector
+	(pt 1320 848)
+	(pt 1272 848)
+)
+(connector
+	(pt 1320 864)
+	(pt 1272 864)
+)
+(connector
+	(text "key[0]" (rect 234 864 265 876)(font "Arial" ))
+	(pt 224 880)
+	(pt 968 880)
+)
+(connector
+	(pt 712 896)
+	(pt 968 896)
+)
+(connector
+	(pt 712 328)
+	(pt 712 896)
+)
+(connector
+	(pt 272 800)
+	(pt 968 800)
+)
+(connector
+	(pt 272 88)
+	(pt 272 800)
+)
+(connector
+	(pt 728 864)
+	(pt 968 864)
+)
+(connector
+	(pt 728 664)
+	(pt 728 864)
+)
+(connector
+	(pt 744 848)
+	(pt 968 848)
+)
+(connector
+	(pt 1544 880)
+	(pt 1272 880)
+)
+(connector
+	(pt 1544 736)
+	(pt 1544 880)
+)
+(connector
+	(pt 1528 896)
+	(pt 1272 896)
+	(bus)
+)
+(connector
+	(pt 928 928)
+	(pt 968 928)
+)
+(connector
+	(pt 928 944)
+	(pt 968 944)
+)
+(connector
+	(pt 928 960)
+	(pt 968 960)
+)
+(connector
+	(pt 928 976)
+	(pt 968 976)
+)
+(connector
+	(pt 1528 752)
+	(pt 1528 896)
+	(bus)
+)
+(connector
+	(pt 760 832)
+	(pt 968 832)
+	(bus)
+)
+(connector
+	(pt 760 280)
+	(pt 760 832)
+	(bus)
+)
+(connector
+	(pt 776 816)
+	(pt 968 816)
+	(bus)
+)
+(connector
+	(text "IO_write_data[7..0]" (rect 760 727 772 820)(font "Arial" )(vertical))
+	(pt 776 344)
+	(pt 776 816)
+	(bus)
 )
 (connector
 	(pt 224 104)
@@ -2290,6 +2255,22 @@ agreement for further details.
 	(pt 224 1240)
 )
 (connector
+	(pt 640 328)
+	(pt 712 328)
+)
+(connector
+	(pt 712 328)
+	(pt 944 328)
+)
+(connector
+	(pt 208 88)
+	(pt 272 88)
+)
+(connector
+	(pt 272 88)
+	(pt 344 88)
+)
+(connector
 	(pt 744 296)
 	(pt 744 848)
 )
@@ -2298,9 +2279,29 @@ agreement for further details.
 	(pt 744 1272)
 )
 (connector
-	(pt 1192 1256)
-	(pt 1272 1256)
+	(pt 696 280)
+	(pt 760 280)
 	(bus)
+)
+(connector
+	(pt 760 280)
+	(pt 776 280)
+	(bus)
+)
+(connector
+	(text "IO_write_data[15..0]" (rect 650 328 749 340)(font "Arial" )(invisible))
+	(pt 640 344)
+	(pt 776 344)
+	(bus)
+)
+(connector
+	(pt 776 344)
+	(pt 792 344)
+	(bus)
+)
+(connector
+	(pt 1272 816)
+	(pt 1320 816)
 )
 (junction (pt 664 296))
 (junction (pt 208 88))
