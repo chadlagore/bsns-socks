@@ -80,7 +80,7 @@ module avalon_distance_module_interface (
     hex_decoder h2(hex2, data2);
     hex_decoder h3(hex3, data3);
 
-    assign dist_mod_data = data0 + (data >> 1) + (data2 >> 2);
+    //////assign dist_mod_data = data0 + (data >> 1) + (data2 >> 2);
 
 	// Respond to incoming request for data.
     always_comb begin
