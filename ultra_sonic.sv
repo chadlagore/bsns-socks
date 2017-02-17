@@ -113,7 +113,7 @@ module ultra_sonic(
     else
       delay_trigger_count <= delay_trigger_count;
   end
-
+  
   // Echo counter!
   always_ff @(posedge clk or negedge reset_l)
   begin

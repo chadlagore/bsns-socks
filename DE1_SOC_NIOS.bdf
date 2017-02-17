@@ -2121,28 +2121,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "IO_read_data[15..0]" (rect 298 1064 395 1076)(font "Arial" ))
-	(pt 288 1080)
-	(pt 1416 1080)
-	(bus)
-)
-(connector
-	(pt 1416 1224)
-	(pt 1416 1080)
-	(bus)
-)
-(connector
-	(text "IO_read_data[15..0]" (rect 260 -197 272 -100)(font "Arial" )(vertical))
-	(pt 288 -248)
-	(pt 288 168)
-	(bus)
-)
-(connector
-	(pt 288 168)
-	(pt 288 1080)
-	(bus)
-)
-(connector
 	(pt 968 1272)
 	(pt 744 1272)
 )
@@ -2302,6 +2280,28 @@ agreement for further details.
 (connector
 	(pt 1272 816)
 	(pt 1320 816)
+)
+(connector
+	(pt 1416 1224)
+	(pt 1416 1080)
+	(bus)
+)
+(connector
+	(text "IO_read_data[15..0]" (rect 298 1064 395 1076)(font "Arial" ))
+	(pt 1416 1080)
+	(pt 288 1080)
+	(bus)
+)
+(connector
+	(text "IO_read_data[15..0]" (rect 260 -197 272 -100)(font "Arial" )(vertical))
+	(pt 288 -248)
+	(pt 288 168)
+	(bus)
+)
+(connector
+	(pt 288 168)
+	(pt 288 1080)
+	(bus)
 )
 (junction (pt 664 296))
 (junction (pt 208 88))
