@@ -48,6 +48,7 @@ module avalon_distance_module_interface (
 	logic read_data_valid;
 	logic [15:0] dist_mod_data; // downto 16 bit.
     logic [7:0] hex0, hex1, hex2, hex3;
+    logic [3:0] data0, data1, data2, data3;
     output logic [6:0] HEX0, HEX1, HEX2, HEX3;
 
     // // instantiation of dist sensor fsm, puts out 16
@@ -74,14 +75,21 @@ module avalon_distance_module_interface (
     assign HEX2 = hex2;
     assign HEX3 = hex3;
 
+    hex_decoder h0(hex0, data0);
+    hex_decoder h1(hex1, data1);
+    hex_decoder h2(hex2, data2);
+    hex_decoder h3(hex3, data3);
+
+    assign dist_mod_data = data0 + (data >> 1) + (data2 >> 2);
+
 	// Respond to incoming request for data.
     always_comb begin
         if(io_select) begin
             case(address)
-                DISTANCE: read_data = hex0;
-                BROKEN:   read_data = hex1;
-			    STATUS:   read_data = hex2;
-                CAR:      read_data = hex3;
+                DISTANCE: read_data = data0;
+                BROKEN:   read_data = data1;
+			    STATUS:   read_data = data2;
+                CAR:      read_data = data3;
                 default:  read_data = 16'bz;
 			endcase
         end
