@@ -48,7 +48,6 @@ module avalon_distance_module_interface (
 	logic read_data_valid;
 	logic [15:0] dist_mod_data; // downto 16 bit.
     logic [7:0] hex0, hex1, hex2, hex3;
-
     output logic [6:0] HEX0, HEX1, HEX2, HEX3;
 
     // // instantiation of dist sensor fsm, puts out 16
@@ -64,22 +63,25 @@ module avalon_distance_module_interface (
     UltraSonic us(
             .clk(clk),
             .gpio({trigger, echo}),
-            .hex0(HEX0),
-            .hex1(HEX1),
-            .hex2(HEX2),
-            .hex3(HEX3)
+            .hex0(hex0),
+            .hex1(hex1),
+            .hex2(hex2),
+            .hex3(hex3)
         );
 
-    assign dist_mod_data = {HEX0, HEX1};
+    assign HEX0 = hex0;
+    assign HEX1 = hex1;
+    assign HEX2 = hex2;
+    assign HEX3 = hex3;
 
 	// Respond to incoming request for data.
     always_comb begin
         if(io_select) begin
             case(address)
-                DISTANCE: read_data = dist_mod_data;
-                BROKEN:   read_data = {15'b0, dist_mod_status};
-			    STATUS:   read_data = {15'b0, dist_mod_status};
-                CAR:      read_data = 16'b100;
+                DISTANCE: read_data = hex0;
+                BROKEN:   read_data = hex1;
+			    STATUS:   read_data = hex2;
+                CAR:      read_data = hex3;
                 default:  read_data = 16'bz;
 			endcase
         end

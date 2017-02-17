@@ -964,6 +964,19 @@ set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
 set_global_assignment -name OPTIMIZE_MULTI_CORNER_TIMING ON
 set_global_assignment -name FITTER_EFFORT "AUTO FIT"
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name SYSTEMVERILOG_FILE ultra/car_counter.sv
+set_global_assignment -name VHDL_FILE ultra/UltraSonic.vhd
+set_global_assignment -name SYSTEMVERILOG_FILE ultra/ultra_sonic_top.sv
+set_global_assignment -name VHDL_FILE ultra/TriggerGenerator.vhd
+set_global_assignment -name VHDL_FILE ultra/segmentdriver.vhd
+set_global_assignment -name VHDL_FILE ultra/segmentdecoder.vhd
+set_global_assignment -name VHDL_FILE ultra/seg7.vhd
+set_global_assignment -name VHDL_FILE ultra/RangeSensor.vhd
+set_global_assignment -name VHDL_FILE ultra/Distance_Calcualtion.vhd
+set_global_assignment -name VHDL_FILE ultra/clockdivider.vhd
+set_global_assignment -name VHDL_FILE ultra/binary_counter.vhd
+set_global_assignment -name VHDL_FILE ultra/BCDconverter.vhd
 set_global_assignment -name QSYS_FILE nios_system.qsys
 set_global_assignment -name VHDL_FILE ACIA_6850.vhd
 set_global_assignment -name VHDL_FILE ACIA_RX.vhd
@@ -992,4 +1005,3 @@ set_global_assignment -name SOURCE_FILE DE1_SOC_NIOS.qsf
 set_global_assignment -name BDF_FILE ACIA_BaudRate_Generator.bdf
 set_global_assignment -name BDF_FILE OnChipM68xxIO.bdf
 set_global_assignment -name VHDL_FILE M68xxIODecoder.vhd
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
