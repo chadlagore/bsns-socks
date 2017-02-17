@@ -70,6 +70,26 @@ module avalon_distance_module_interface (
             .hex3(HEX3)
         );
 
+    hex_decoder centimeter_decoder1 (
+            .hex_code(HEX0),
+            .value(data_out[3:0])
+        );
+
+    hex_decoder centimeter_decoder2 (
+            .hex_code(HEX1),
+            .value(data_out[7:4])
+        );
+
+    hex_decoder centimeter_decoder3 (
+            .hex_code(HEX2),
+            .value(data_out[11:8])
+        );
+
+    hex_decoder centimeter_decoder4 (
+            .hex_code(HEX3),
+            .value(data_out[15:12])
+        );
+
     assign dist_mod_data = {HEX0, HEX1};
 
 	// Respond to incoming request for data.
@@ -86,10 +106,10 @@ module avalon_distance_module_interface (
         else read_data = 16'bz;
     end
 
-   // Store dist module data in hexes.
-   always_ff @(posedge clk or negedge reset_l) begin
-       if(~reset_l) flash <= 1'b0;
-       else if (echo) flash <= 1'b1;
-   end
+    // Store dist module data in hexes.
+    always_ff @(posedge clk or negedge reset_l) begin
+        if(~reset_l) flash <= 1'b0;
+        else if (echo) flash <= 1'b1;
+    end
 
 endmodule
