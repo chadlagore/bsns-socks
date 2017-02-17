@@ -16,7 +16,10 @@ module avalon_distance_module_interface (
     	read_data, data_out,
 
     	// ultrasonic distance sensor outputs
-    	trigger, flash
+    	trigger, flash,
+
+        // Hexes.
+        HEX0, HEX1, HEX2, HEX3
     );
 
 	// status and data memory locations
@@ -44,18 +47,30 @@ module avalon_distance_module_interface (
 	logic dist_mod_status;
 	logic read_data_valid;
 	logic [15:0] dist_mod_data; // downto 16 bit.
+    logic [7:0] hex0, hex1, hex2, hex3;
 
-    // instantiation of dist sensor fsm, puts out 16 
-	ultra_sonic us(
-		.clk(clk),
-		.reset_l(1'b1), // hard reset on boot up.
-		.read_data(dist_mod_data),
-		.read_data_valid(dist_mod_status),
-		.echo(echo),
-		.trigger(trigger)
-	);
+    output logic [6:0] HEX0, HEX1, HEX2, HEX3;
 
-    assign data_out = 16'b101;
+    // // instantiation of dist sensor fsm, puts out 16
+	// ultra_sonic us(
+	// 	.clk(clk),
+	// 	.reset_l(1'b1), // hard reset on boot up.
+	// 	.read_data(dist_mod_data),
+	// 	.read_data_valid(dist_mod_status),
+	// 	.echo(echo),
+	// 	.trigger(trigger)
+	// );
+
+    UltraSonic us(
+            .clk(clk),
+            .gpio({trigger, echo}),
+            .hex0(HEX0),
+            .hex1(HEX1),
+            .hex2(HEX2),
+            .hex3(HEX3)
+        );
+
+    assign dist_mod_data = {HEX0, HEX1};
 
 	// Respond to incoming request for data.
     always_comb begin
@@ -63,7 +78,7 @@ module avalon_distance_module_interface (
             case(address)
                 DISTANCE: read_data = dist_mod_data;
                 BROKEN:   read_data = {15'b0, dist_mod_status};
-					 STATUS:   read_data = {15'b0, dist_mod_status};
+			    STATUS:   read_data = {15'b0, dist_mod_status};
                 CAR:      read_data = 16'b100;
                 default:  read_data = 16'bz;
 			endcase

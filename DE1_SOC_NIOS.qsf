@@ -965,6 +965,16 @@ set_instance_assignment -name PACKAGE_SKEW_COMPENSATION OFF -to HPS_DDR3_WE_N
 set_instance_assignment -name PACKAGE_SKEW_COMPENSATION OFF -to HPS_DDR3_RESET_N
 set_instance_assignment -name PACKAGE_SKEW_COMPENSATION OFF -to HPS_DDR3_CK_P
 set_instance_assignment -name PACKAGE_SKEW_COMPENSATION OFF -to HPS_DDR3_CK_N
+set_global_assignment -name VHDL_FILE downloaded/UltraSonic.vhd
+set_global_assignment -name VHDL_FILE downloaded/TriggerGenerator.vhd
+set_global_assignment -name VHDL_FILE downloaded/segmentdriver.vhd
+set_global_assignment -name VHDL_FILE downloaded/segmentdecoder.vhd
+set_global_assignment -name VHDL_FILE downloaded/seg7.vhd
+set_global_assignment -name VHDL_FILE downloaded/RangeSensor.vhd
+set_global_assignment -name VHDL_FILE downloaded/Distance_Calcualtion.vhd
+set_global_assignment -name VHDL_FILE downloaded/clockdivider.vhd
+set_global_assignment -name VHDL_FILE downloaded/binary_counter.vhd
+set_global_assignment -name VHDL_FILE downloaded/BCDconverter.vhd
 set_global_assignment -name BDF_FILE DE1_SOC_NIOS.bdf
 set_global_assignment -name SYSTEMVERILOG_FILE ultra_top.sv
 set_global_assignment -name SYSTEMVERILOG_FILE ultra_sonic_mm_tb.sv
